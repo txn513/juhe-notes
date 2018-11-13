@@ -1,0 +1,39 @@
+.single-note-wrap {
+  box-sizing: border-box;
+  padding: 20rpx 20rpx 10rpx;
+  width: 700rpx;
+  margin: 14px auto 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
+  font-weight: 400;
+  text-align: left;
+}
+.single-note-top {
+  max-height: 400rpx;
+  overflow: hidden;
+}
+.single-note-date {
+  height: 50rpx;
+  line-height: 50rpx;
+  font-size: 12px;
+  position: relative;
+  color: #888;
+}
+.single-note-content {
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+.no-note {
+  margin-top: 50rpx;
+  color: #888;
+  font-weight: 200;
+}
+.no-note navigator{
+  border-radius: 4px;
+  border: 1px solid #cecece;
+  padding: 8rpx;
+}

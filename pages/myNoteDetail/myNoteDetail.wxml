@@ -1,0 +1,13 @@
+<view class="container">
+  <view class='single-note-wrap'>
+    <view class='single-note-top'>
+      <text space="nbsp" class='single-note-content' >{{noteObj.content}}</text>
+    </view>
+    <view class='single-note-bottom single-note-date'>{{noteObj.created_at}}</view> 
+  </view>
+
+  <view class='btn-wrap'>
+    <!-- <button>编辑</button> -->
+    <button class='btn-delete' bindtap='deleteNote'>删除</button>
+  </view>
+</view>

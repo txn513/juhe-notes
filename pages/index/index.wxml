@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="container">
+    
+
+    <view class="section">
+      <textarea 
+      class="xt-textarea {{isFocus? 'focus': ''}}" 
+      bindblur="bindTextAreaBlur" 
+      placeholder="请输入内容" 
+      bindinput='getContent'
+      bindblur='blurTextArea'
+      bindfocus='focusTextArea'
+      value='{{content}}'
+      />
+    </view>
+
+    <button bindtap="uploadNote" class='xt-button-circle'>提交</button>
+    <view class='goToAllNotes'>
+      <navigator class="" url='../allMyNotes/allMyNotes'>我的便签</navigator>
+    </view>
+    <view class="userinfo" bindtap="login">
+        <image
+            class="userinfo-avatar"
+            src="{{logged ? userInfo.avatarUrl : './user-unlogin.png'}}"
+            background-size="cover"
+        ></image>
+        
+    </view>
+</view>

@@ -1,0 +1,14 @@
+<view class='container'>
+  <view wx:if="{{listLen > 0}}">
+    <view class='single-note-wrap'  wx:for="{{notesList}}" bindtap='goToDetail' data-id="{{item._id}}">
+      <view class='single-note-top'>
+        <text space="nbsp" class='single-note-content' >{{item.content}}</text>
+      </view>
+      <view class='single-note-bottom single-note-date'>{{item.created_at}}</view> 
+    </view>
+  </view>
+  <view wx:elif="{{listLen <= 0 && loaded}}" class='no-note'>
+    <button bindtap='navigateBack'>添加一个便签</button>
+  </view>
+
+</view>

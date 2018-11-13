@@ -1,0 +1,78 @@
+/**index.wxss**/
+page {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.section {
+  width: 100%;
+  padding: 0;
+}
+.xt-textarea {
+  box-sizing: border-box;
+  padding: 20rpx 20rpx 10rpx;
+  width: 700rpx;
+  margin: 14px auto 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
+  font-weight: 200;
+  text-align: left;
+  transition: all .5s;
+  height: 400rpx;
+}
+.xt-textarea.focus {
+  box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
+}
+
+.xt-button-circle {
+    display: block;
+    margin: 0 auto;
+    margin-top: 100rpx;
+    height: 150rpx;
+    width: 150rpx;
+    border-radius: 75rpx;
+    background: rgb(60, 152, 158) none repeat scroll 0% 0%;
+    box-shadow: 10rpx 20rpx 20rpx #eee, -10rpx 20rpx 20rpx #eee;
+    text-align: center;
+    line-height: 150rpx;
+    font-size: 14px;
+    color: #fff;
+    text-decoration: none;
+    user-select: none;
+  }
+.xt-button-circle:active {
+  box-shadow: 5rpx 15rpx 10rpx #eee, -5rpx 15rpx 10rpx #eee;
+}
+.goToAllNotes {
+  margin-top: 40rpx;
+}
+.goToAllNotes navigator {
+  color: #CECECE;
+  text-decoration: underline;
+}
+
+.userinfo{
+    margin-top: 80rpx;
+    height: 140rpx;
+    width: 300rpx;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-left: none;
+    border-right: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 300ms ease;
+}
+
+.userinfo-avatar {
+    width: 100rpx;
+    height: 100rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+.disable {
+    color: #888;
+}
