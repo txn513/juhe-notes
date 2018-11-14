@@ -21,6 +21,7 @@ page {
   text-align: left;
   transition: all .5s;
   height: 400rpx;
+  overflow: hidden;
 }
 .xt-textarea.focus {
   box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;

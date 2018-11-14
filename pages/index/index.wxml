@@ -11,6 +11,7 @@
       bindblur='blurTextArea'
       bindfocus='focusTextArea'
       value='{{content}}'
+      maxlength='100000'
       />
     </view>
 
