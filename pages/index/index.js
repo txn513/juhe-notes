@@ -67,6 +67,12 @@ Page({
             title: '保存成功',
             icon: 'success'
           })
+
+          setTimeout(() => {
+            wx.navigateTo({
+              url: '/pages/allMyNotes/allMyNotes'
+            })
+          }, 1000)
         }, err => {
           // err
         })

@@ -1,7 +1,9 @@
 Page({
   data: {
     noteID: '',
-    noteObj: {}
+    noteObj: {},
+    content: '',
+    isFocus: false
   },
   onLoad: function (option) {
     console.log(option.id)
@@ -40,6 +42,42 @@ Page({
       this.setData({
         noteObj: obj
       });
+    }, err => {
+      // err
+    })
+  },
+  getContent(e) {
+    this.setData({
+      content: e.detail.value
+    })
+  },
+  blurTextArea() {
+    this.setData({
+      isFocus: false
+    });
+  },
+  focusTextArea() {
+    this.setData({
+      isFocus: true
+    });
+  },
+  updateNote(){
+    let tableID = getApp().globalData.tableID;
+    let MyTableObject = new wx.BaaS.TableObject(tableID);
+    let MyRecord = MyTableObject.getWithoutData(this.data.noteID);
+    let { content } = this.data;
+    console.log(this.data.noteID)
+    MyRecord.set({
+      'content': content
+    })
+
+    MyRecord.update().then(res => {
+      console.log(res)
+      wx.showToast({
+        title: '更新成功',
+        icon: 'success'
+      })
+      // success
     }, err => {
       // err
     })

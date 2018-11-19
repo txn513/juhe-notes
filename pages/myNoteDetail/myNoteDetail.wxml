@@ -1,13 +1,24 @@
 <view class="container">
-  <view class='single-note-wrap'>
+  <!-- <view class='single-note-wrap'>
     <view class='single-note-top'>
       <text space="nbsp" class='single-note-content' >{{noteObj.content}}</text>
     </view>
     <view class='single-note-bottom single-note-date'>{{noteObj.created_at}}</view> 
-  </view>
+  </view> -->
+
+  <textarea 
+      class="xt-textarea {{isFocus? 'focus': ''}}" 
+      placeholder="请输入内容" 
+      bindinput='getContent'
+      bindblur='blurTextArea'
+      bindfocus='focusTextArea'
+      value='{{noteObj.content}}'
+      maxlength='100000'
+      />
 
   <view class='btn-wrap'>
     <!-- <button>编辑</button> -->
-    <button class='btn-delete' bindtap='deleteNote'>删除</button>
+    <button class='btn-update btn' bindtap='updateNote'>更新</button>
+    <button class='btn-delete btn' bindtap='deleteNote'>删除</button>
   </view>
 </view>

@@ -20,7 +20,7 @@ page {
   font-weight: 200;
   text-align: left;
   transition: all .5s;
-  height: 400rpx;
+  height: 600rpx;
   overflow: hidden;
 }
 .xt-textarea.focus {

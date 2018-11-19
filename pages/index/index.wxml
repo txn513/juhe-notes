@@ -5,7 +5,6 @@
     <view class="section">
       <textarea 
       class="xt-textarea {{isFocus? 'focus': ''}}" 
-      bindblur="bindTextAreaBlur" 
       placeholder="请输入内容" 
       bindinput='getContent'
       bindblur='blurTextArea'

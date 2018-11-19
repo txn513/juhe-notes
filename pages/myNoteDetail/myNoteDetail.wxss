@@ -19,6 +19,9 @@
 .btn-wrap {
   margin-top: 50rpx;
 }
+.btn {
+  margin-bottom: 20rpx;
+}
 .btn-wrap button {
   height: 100rpx;
   width: 700rpx;
@@ -26,4 +29,27 @@
   font-size: 12px;
   position: relative;
   color: #888;
+}
+.btn-wrap .btn-update {
+  border: none;
+  background: rgb(60, 152, 158);
+  color: #fff;
+}
+.xt-textarea {
+  box-sizing: border-box;
+  padding: 20rpx 20rpx 10rpx;
+  width: 700rpx;
+  margin: 14px auto 0;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
+  font-weight: 200;
+  text-align: left;
+  transition: all .5s;
+  height: 800rpx;
+  /* height: 800rpx; */
+  overflow: hidden;
+}
+.xt-textarea.focus {
+  box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
 }
