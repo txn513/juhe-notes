@@ -40,7 +40,8 @@ Page({
       let obj = res.data;
       obj['created_at'] = new Date(obj['created_at']*1000).toLocaleString();
       this.setData({
-        noteObj: obj
+        noteObj: obj,
+        content: obj.content
       });
     }, err => {
       // err
