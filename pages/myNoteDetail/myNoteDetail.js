@@ -1,3 +1,5 @@
+let util = require('../../utils/util.js')
+
 Page({
   data: {
     noteID: '',
@@ -13,6 +15,7 @@ Page({
     this.getNoteDetail();
   },
   getNoteDetail(id){
+    util.showBusy()
     let tableID = 41764;
     let MyTableObject = new wx.BaaS.TableObject(tableID)
 
@@ -43,7 +46,9 @@ Page({
         noteObj: obj,
         content: obj.content
       });
+      wx.hideLoading()
     }, err => {
+      wx.hideLoading()
       // err
     })
   },
