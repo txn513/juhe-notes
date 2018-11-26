@@ -1,5 +1,5 @@
 <view class='container'>
-  <view wx:if="{{listLen > 0}}">
+  <view wx:if="{{listLen > 0}}" style="margin-bottom: 20rpx;">
     <view class='single-note-wrap'  wx:for="{{notesList}}" bindtap='goToDetail' data-id="{{item._id}}" wx:key="_id">
       <view class='single-note-top'>
         <text space="nbsp" class='single-note-content' >{{item.content}}</text>

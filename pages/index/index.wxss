@@ -12,7 +12,7 @@ page {
 .xt-textarea {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
-  width: 700rpx;
+  width: 720rpx;
   margin: 14px auto 0;
   border-radius: 4px;
   background: #fff;

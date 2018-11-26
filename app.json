@@ -1,14 +1,46 @@
 {
-  "pages":[
-    "pages/index/index",
+  "pages": [
     "pages/allMyNotes/allMyNotes",
-    "pages/myNoteDetail/myNoteDetail"
+    "pages/index/index",
+    "pages/myNoteDetail/myNoteDetail",
+    "pages/my/my"
   ],
-  "window":{
-    "backgroundColor":"#F6F6F6",
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "TT便签",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#333",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/allMyNotes/allMyNotes",
+        "text": "便签",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home_active.png",
+        "color": "#333333",
+        "selectedColor": "#666666"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "新建",
+        "iconPath": "/images/new.png",
+        "selectedIconPath": "/images/new.png",
+        "color": "#333333",
+        "selectedColor": "#666666"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "/images/my.png",
+        "selectedIconPath": "/images/my_active.png",
+        "color": "#333333",
+        "selectedColor": "#666666"
+      }
+    ]
   }
 }
