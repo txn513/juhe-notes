@@ -11,11 +11,13 @@
       bindfocus='focusTextArea'
       value='{{content}}'
       maxlength='100000'
+      style="height: {{taHeight + 'px'}}"
       />
+      <button bindtap="uploadNote" class='xt-button-circle'>提交</button>
     </view>
 
-    <button bindtap="uploadNote" class='xt-button-circle'>提交</button>
-    <view class='goToAllNotes'>
+    <!-- <button bindtap="uploadNote" class='xt-button-circle'>提交</button> -->
+    <!-- <view class='goToAllNotes'>
       <navigator class="" url='../allMyNotes/allMyNotes'>我的便签</navigator>
     </view>
     <view class="userinfo" bindtap="login">
@@ -25,5 +27,5 @@
             background-size="cover"
         ></image>
         
-    </view>
+    </view> -->
 </view>

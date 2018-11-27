@@ -10,7 +10,8 @@ Page({
         takeSession: false,
         requestResult: '',
         content: '',
-        isFocus: false
+        isFocus: false,
+        taHeight: 0
     },
     onLoad(){
       var that = this;
@@ -19,6 +20,14 @@ Page({
           that.setData({
             userInfo: res.userInfo,
             logged: true
+          })
+        }
+      })
+      wx.getSystemInfo({
+        success: function(res) {
+          console.log(res)
+          that.setData({
+            taHeight: res.screenHeight - 200
           })
         }
       })

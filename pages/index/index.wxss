@@ -5,14 +5,18 @@ page {
     flex-direction: column;
     justify-content: flex-start;
 }
+.container {
+  position: relative;
+}
 .section {
+  position: relative;
   width: 100%;
   padding: 0;
 }
 .xt-textarea {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
-  width: 720rpx;
+  width: 730rpx;
   margin: 14px auto 0;
   border-radius: 4px;
   background: #fff;
@@ -28,21 +32,25 @@ page {
 }
 
 .xt-button-circle {
-    display: block;
-    margin: 0 auto;
-    margin-top: 100rpx;
-    height: 150rpx;
-    width: 150rpx;
-    border-radius: 75rpx;
-    background: rgb(60, 152, 158) none repeat scroll 0% 0%;
-    box-shadow: 10rpx 20rpx 20rpx #eee, -10rpx 20rpx 20rpx #eee;
-    text-align: center;
-    line-height: 150rpx;
-    font-size: 14px;
-    color: #fff;
-    text-decoration: none;
-    user-select: none;
-  }
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  margin: 0 auto;
+  margin-top: 100rpx;
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 60rpx;
+  background: rgb(60, 152, 158) none repeat scroll 0% 0%;
+  box-shadow: 10rpx 20rpx 20rpx #eee, -10rpx 20rpx 20rpx #eee;
+  text-align: center;
+  line-height: 120rpx;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
+}
 .xt-button-circle:active {
   box-shadow: 5rpx 15rpx 10rpx #eee, -5rpx 15rpx 10rpx #eee;
 }

@@ -22,6 +22,8 @@ Page({
       }
     }
   },
+
+  // 获取便签列表
   getAllNotes(){
     util.showBusy()
     let tableID = 41764;
@@ -55,6 +57,7 @@ Page({
       delta: 1
     })
   },
+  // 跳转详情
   goToDetail(e){
     console.log(e)
     wx.navigateTo({
