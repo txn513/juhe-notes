@@ -1,4 +1,5 @@
 let util = require('../../utils/util.js')
+const app = getApp()
 
 Page({
   data: {
@@ -7,10 +8,18 @@ Page({
     loaded: false
   },
   onLoad(){
-    
+    if (app.globalData.userID) {
+      this.getAllNotes()
+    } else {
+      app.userCallback = userId => {
+        if (userId) {
+          this.getAllNotes()
+        }
+      }
+    }
   },
   onShow(){
-    this.getAllNotes()
+    // 
   },
   getAllNotes(){
     util.showBusy()

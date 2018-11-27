@@ -18,7 +18,10 @@ App({
         // 登录成功
         console.log(res)
         this.globalData.userID = res.id
-        console.log(this.globalData.userID)
+        // console.log(this.globalData.userID)
+        if (this.userCallback) {
+          this.userCallback(res.id)
+        }
       }, res => {
         // 登录失败
       })
