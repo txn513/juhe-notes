@@ -6,9 +6,9 @@
     "pages/my/my"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "backgroundColor": "#FFFFFF",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#FFFFFF",
     "navigationBarTitleText": "TT便签",
     "navigationBarTextStyle": "black"
   },
@@ -28,8 +28,8 @@
       {
         "pagePath": "pages/index/index",
         "text": "新建",
-        "iconPath": "/images/new.png",
-        "selectedIconPath": "/images/new.png",
+        "iconPath": "/images/new_note.png",
+        "selectedIconPath": "/images/new_note.png",
         "color": "#333333",
         "selectedColor": "#666666"
       },

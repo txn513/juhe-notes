@@ -8,6 +8,10 @@ Page({
     loaded: false
   },
   onLoad(){
+    
+  },
+  onShow(){
+    // 
     if (app.globalData.userID) {
       this.getAllNotes()
     } else {
@@ -17,9 +21,6 @@ Page({
         }
       }
     }
-  },
-  onShow(){
-    // 
   },
   getAllNotes(){
     util.showBusy()
