@@ -5,6 +5,9 @@ page {
     flex-direction: column;
     justify-content: flex-start;
 }
+.animation {
+  transition: all .5s;
+}
 .container {
   position: relative;
 }
@@ -23,12 +26,13 @@ page {
   box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
   font-weight: 200;
   text-align: left;
-  transition: all .5s;
+  
   height: 600rpx;
   overflow: hidden;
 }
 .xt-textarea.focus {
   box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
+  transition: all .5s;
 }
 
 .xt-button-circle {
