@@ -13,7 +13,7 @@
       maxlength='100000'
       style="height: {{taHeight + 'px'}}"
       />
-      <button bindtap="uploadNote" class='xt-button-circle'>提交</button>
+      <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view>
     </view>
 
     <!-- <button bindtap="uploadNote" class='xt-button-circle'>提交</button> -->

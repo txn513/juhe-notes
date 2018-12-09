@@ -27,7 +27,7 @@ Page({
         success: function(res) {
           console.log(res)
           that.setData({
-            taHeight: res.screenHeight - 200
+            taHeight: res.screenHeight*.75
           })
         }
       })

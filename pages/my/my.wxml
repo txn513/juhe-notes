@@ -1,2 +1,9 @@
 <!--pages/my/myt.wxml-->
-<text>pages/my/myt.wxml</text>
+<!--pages/myself/myself.wxml-->
+<view class='container'>
+    <view class='head'>
+      <open-data class="user-avatar" type="userAvatarUrl"></open-data>
+      <open-data class="user-nick" type="userNickName"></open-data>
+    </view>
+</view>
+

@@ -1,1 +1,26 @@
 /* pages/my/myt.wxss */
+.head{
+  border-top: 1rpx rgb(242, 242, 242) solid;
+  height: 190rpx;
+  padding: 0 30rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  width: 100%;
+}
+.user-avatar{
+  overflow:hidden;
+  display: block;
+  margin-left:20rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 1rpx solid #fff;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  margin-right: 50rpx; 
+}
+.user-nick {
+font-size: 34rpx;
+font-weight: bold;
+color: rgba(51,51,51,1);
+}
