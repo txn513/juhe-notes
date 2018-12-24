@@ -5,10 +5,13 @@ Page({
   data: {
     notesList: [],
     listLen: 0,
-    loaded: false
+    loaded: false,
+    tabbar: {}
   },
   onLoad(){
-    
+    // template.tabbar("tabBar", 0, this)//0表示第一个tabbar
+    app.editTabbar();
+    app.hidetabbar();
   },
   onShow(){
     // 

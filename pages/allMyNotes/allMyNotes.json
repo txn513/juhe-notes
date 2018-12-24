@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "TT便签"
+  "navigationBarTitleText": "TT便签",
+  "usingComponents": {
+    "tabbar": "../../tabbarComponent/tabbar"
+  }
 }

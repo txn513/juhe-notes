@@ -1,9 +1,11 @@
 <!--pages/my/myt.wxml-->
 <!--pages/myself/myself.wxml-->
+<!-- <import src="/pages/template/template.wxml"/>
+<template is="tabBar" data="{{tabBar:bindData.tabBar}}"/> -->
 <view class='container'>
     <view class='head'>
       <open-data class="user-avatar" type="userAvatarUrl"></open-data>
       <open-data class="user-nick" type="userNickName"></open-data>
     </view>
 </view>
-
+<tabbar tabbar="{{tabbar}}"></tabbar>

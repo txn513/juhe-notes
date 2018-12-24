@@ -26,7 +26,7 @@
         "selectedColor": "#666666"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/my/my",
         "text": "新建",
         "iconPath": "/images/new_note.png",
         "selectedIconPath": "/images/new_note.png",

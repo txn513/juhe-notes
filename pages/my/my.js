@@ -1,25 +1,28 @@
 // pages/my/myt.js
+// const template = require('../template/template.js');
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    tabbar: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
+    // template.tabbar("tabBar", 2, this)//0表示第一个tabbar
+    app.editTabbar();
+    app.hidetabbar();
+  },  
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
