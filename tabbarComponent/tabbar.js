@@ -22,13 +22,13 @@ Component({
             "pagePath": "/pages/middle/middle",
             "iconPath": "icon/icon_release.png",
             "isSpecial": true,
-            "text": "发布"
+            "text": "新建"
           },
           {
             "pagePath": "/pages/mine/mine",
             "iconPath": "icon/icon_mine.png",
             "selectedIconPath": "icon/icon_mine_HL.png",
-            "text": "我的"
+            "text": "我"
           }
         ]
       }

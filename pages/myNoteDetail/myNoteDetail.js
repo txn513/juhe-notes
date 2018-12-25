@@ -39,7 +39,7 @@ Page({
     // })
     MyTableObject.get(this.data.noteID).then(res => {
       // success
-      console.log(res)
+      // console.log(res)
       let obj = res.data;
       obj['created_at'] = new Date(obj['created_at']*1000).toLocaleString();
       this.setData({

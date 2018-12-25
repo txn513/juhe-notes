@@ -51,13 +51,13 @@ App({
           "pagePath": "/pages/index/index",
           "iconPath": "icon/icon_release.png",
           "isSpecial": true,
-          "text": "发布"
+          "text": "新建"
         },
         {
           "pagePath": "/pages/my/my",
           "iconPath": "icon/icon_mine.png",
           "selectedIconPath": "icon/icon_mine_HL.png",
-          "text": "我的"
+          "text": "我"
         }
       ]
     }
@@ -74,7 +74,7 @@ App({
       // 微信用户登录小程序
       wx.BaaS.login(false).then(res => {
         // 登录成功
-        console.log(res)
+        // console.log(res)
         this.globalData.userID = res.id
         // console.log(this.globalData.userID)
         if (this.userCallback) {
