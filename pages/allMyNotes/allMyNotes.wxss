@@ -1,6 +1,9 @@
-
+page {
+  background: #f6f6f6;
+}
 .container {
   padding-bottom: 120rpx;
+  
 }
 .container.iphoneX {
   padding-bottom: 186rpx;
@@ -8,11 +11,11 @@
 .single-note-wrap {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
-  width: 710rpx;
-  margin: 14px auto 0;
+  width: 750rpx;
+  margin: 6px auto 0;
   border-radius: 4px;
   background: #fff;
-  box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
+  /* box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee; */
   font-weight: 400;
   text-align: left;
 }

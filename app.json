@@ -6,9 +6,9 @@
     "pages/my/my"
   ],
   "window": {
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "TT便签",
     "navigationBarTextStyle": "black"
   },
