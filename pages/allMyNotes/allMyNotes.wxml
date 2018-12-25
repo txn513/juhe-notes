@@ -1,7 +1,7 @@
 <!-- <import src="/pages/template/template.wxml"/>
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/> -->
 
-<view class='container'>
+<view class='container {{isIphoneX? "iphoneX": ""}}'>
   <view wx:if="{{listLen > 0}}" style="margin-bottom: 20rpx;">
     <view class='single-note-wrap'  wx:for="{{notesList}}" bindtap='goToDetail' data-id="{{item._id}}" wx:key="_id">
       <view class='single-note-top'>

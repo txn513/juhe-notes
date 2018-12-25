@@ -6,12 +6,13 @@ Page({
     notesList: [],
     listLen: 0,
     loaded: false,
-    tabbar: {}
+    tabbar: {},
+    isIphoneX: app.globalData.systemInfo.model.includes("iPhone X")
   },
   onLoad(){
-    // template.tabbar("tabBar", 0, this)//0表示第一个tabbar
     app.editTabbar();
     app.hidetabbar();
+
   },
   onShow(){
     // 

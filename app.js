@@ -63,7 +63,7 @@ App({
     }
   },
     onLaunch: function () {
-      this.hidetabbar();
+      // this.hidetabbar();
       this.getSystemInfo()
       require('./utils/sdk-v1.9.1.js')
       // 初始化 SDK

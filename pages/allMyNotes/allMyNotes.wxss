@@ -1,3 +1,10 @@
+
+.container {
+  padding-bottom: 120rpx;
+}
+.container.iphoneX {
+  padding-bottom: 186rpx;
+}
 .single-note-wrap {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
