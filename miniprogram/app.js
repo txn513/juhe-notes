@@ -1,6 +1,7 @@
 //app.js
 // var qcloud = require('./vendor/wafer2-client-sdk/index')
-// var config = require('./config')s
+// var config = require('./config')
+let util = require('./utils/util.js');
 App({
   editTabbar: function () {
     let tabbar = this.globalData.tabBar;
@@ -63,6 +64,18 @@ App({
     }
   },
     onLaunch: function () {
+      if (!wx.cloud) {
+        console.error('请使用 2.2.3 或以上的基础库以使用云能力')
+      } else {
+        wx.cloud.init({
+          traceUser: true,
+        })
+      }
+      util.getOpenid(this)
+
+
+
+      //--------------------------
       // this.hidetabbar();
       this.getSystemInfo()
       require('./utils/sdk-v1.9.1.js')
@@ -74,7 +87,7 @@ App({
       // 微信用户登录小程序
       wx.BaaS.login(false).then(res => {
         // 登录成功
-        // console.log(res)
+        console.log(res)
         this.globalData.userID = res.id
         // console.log(this.globalData.userID)
         if (this.userCallback) {
