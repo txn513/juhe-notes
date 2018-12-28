@@ -7,5 +7,21 @@
       <open-data class="user-avatar" type="userAvatarUrl"></open-data>
       <open-data class="user-nick" type="userNickName"></open-data>
     </view>
+    <view class='inner'>
+      <navigator url='/pages/index/index' class='inner_item' hover-class='none'>
+        <image class='icon' src='/images/my/my_create_note.png'></image>
+        <text>写便签</text>
+      </navigator>
+      <navigator open-type="switchTab" url='/pages/allMyNotes/allMyNotes' class='inner_item' hover-class='none'>
+        <image src='/images/my/my_notes_list.png'></image>
+        <text>我的便签</text>
+      </navigator>
+    </view>
+    <view class='list'>
+      <view class='list-item'>
+        <text>关于TT便签</text>
+        <text>v1.1</text>
+      </view>
+    </view>
 </view>
 <tabbar tabbar="{{tabbar}}"></tabbar>
