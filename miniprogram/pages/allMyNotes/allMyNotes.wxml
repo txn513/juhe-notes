@@ -5,7 +5,10 @@
   <view wx:if="{{listLen > 0}}" style="margin-bottom: 20rpx;">
     <view class='single-note-wrap'  wx:for="{{notesList}}" bindtap='goToDetail' data-id="{{item._id}}" wx:key="_id">
       <view class='single-note-top'>
-        <text space="nbsp" class='single-note-content' >{{item.content}}</text>
+        <text space="nbsp" class='single-note-content' >{{item.title}}</text>
+      </view>
+      <view class='single-note-sub' wx:if="item.subTitle">
+        <text space="nbsp" class='single-note-content' >{{item.subTitle}}</text>
       </view>
       <view class='single-note-bottom single-note-date'>{{item.created_at}}</view> 
     </view>

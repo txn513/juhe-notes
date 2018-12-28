@@ -23,6 +23,13 @@ page {
   max-height: 400rpx;
   overflow: hidden;
 }
+.single-note-sub text{
+  text-overflow: ellipsis;
+  font-size: 22rpx;
+  color: #888;
+   white-space: nowrap;
+   overflow: hidden;
+}
 .single-note-date {
   height: 50rpx;
   line-height: 50rpx;

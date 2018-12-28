@@ -30,6 +30,7 @@ Page({
   // 获取便签列表
   getAllNotes(){
     util.showBusy()
+    let that = this;
     let tableID = 41764;
     let MyTableObject = new wx.BaaS.TableObject(tableID)
     let query = new wx.BaaS.Query()
@@ -38,13 +39,16 @@ Page({
 
     MyTableObject.setQuery(query).orderBy('-created_at').find().then(res => {
       // success
-      console.log(res)
+      // console.log(res)
 
       let list = res.data.objects;
-      list.forEach(function(value, index, arr){
+      list.forEach((value, index, arr) => {
         arr[index]['created_at'] = new Date(arr[index]['created_at']*1000).toLocaleString()
+        arr[index]['title'] = this.getNoteTitle(arr[index]['content'],0)
+        arr[index]['subTitle'] = this.getNoteTitle(arr[index]['content'], 1)
       });
-
+      console.log(list)
+      // this.getNoteTitle(list[0].content)
       this.setData({
         notesList: list,
         listLen: list.length,
@@ -55,6 +59,16 @@ Page({
       wx.hideLoading()
       // err
     })
+  },
+  getNoteTitle(con, idx){
+    let tr = con.match(/(.+)\n/g);
+    if (tr) {
+      console.log(tr)
+      return tr[idx].replace(/(^\s*)|(\s*$)/g, "")
+    } else {
+      return idx == 1? '': con
+    }
+    
   },
   navigateBack(){
     wx.navigateBack({
