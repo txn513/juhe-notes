@@ -8,20 +8,31 @@ page {
 .container.iphoneX {
   padding-bottom: 186rpx;
 }
+.container .wrap {
+  margin-top: 10rpx;
+  background: #fff;
+  width: 100%;
+}
 .single-note-wrap {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
-  width: 750rpx;
-  margin: 6px auto 0;
-  border-radius: 4px;
+  width: 690rpx;
+  margin: 0 auto;
+  /* border-radius: 4px; */
   background: #fff;
   /* box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee; */
   font-weight: 400;
   text-align: left;
+  border-bottom: 1px solid #f6f6f6;
 }
 .single-note-top {
-  max-height: 400rpx;
+  /* max-height: 400rpx; */
   overflow: hidden;
+  
+}
+.single-note-top text {
+  line-height: 60rpx;
+  font-weight: 500;
 }
 .single-note-sub text{
   text-overflow: ellipsis;
@@ -29,6 +40,7 @@ page {
   color: #888;
    white-space: nowrap;
    overflow: hidden;
+   line-height: 40rpx
 }
 .single-note-date {
   height: 50rpx;
