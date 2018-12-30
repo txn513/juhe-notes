@@ -71,7 +71,7 @@ App({
           traceUser: true,
         })
       }
-      util.getOpenid(this)
+      // util.getOpenid(this)
 
 
 

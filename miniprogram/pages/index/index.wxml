@@ -10,7 +10,7 @@
       bindblur='blurTextArea'
       bindfocus='focusTextArea'
       value='{{content}}'
-      maxlength='100000'
+      maxlength='10000'
       style="height: {{taHeight + 'px'}}"
       />
       <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view>

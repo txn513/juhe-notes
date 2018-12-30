@@ -9,7 +9,7 @@ page {
   padding-bottom: 186rpx;
 }
 .container .wrap {
-  margin-top: 10rpx;
+  /* margin-top: 10rpx; */
   background: #fff;
   width: 100%;
 }
@@ -25,37 +25,47 @@ page {
   text-align: left;
   border-bottom: 1px solid #f6f6f6;
 }
+
 .single-note-top {
   /* max-height: 400rpx; */
   overflow: hidden;
-  
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 60rpx;
+  line-height: 60rpx;
 }
 .single-note-top text {
-  line-height: 60rpx;
+  /* line-height: 50rpx; */
   font-weight: 500;
 }
-.single-note-sub text{
+.single-note-sub {
+  height: 40rpx;
+  line-height: 40rpx;
   text-overflow: ellipsis;
-  font-size: 22rpx;
-  color: #888;
    white-space: nowrap;
    overflow: hidden;
-   line-height: 40rpx
+   color: #888;
+}
+.single-note-sub text{
+  line-height: 40rpx;
+  font-size: 22rpx;
+  
+  
 }
 .single-note-date {
-  height: 50rpx;
-  line-height: 50rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   font-size: 12px;
   position: relative;
   color: #888;
 }
-.single-note-content {
+/* .single-note-content {
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-}
+} */
 .no-note {
   margin-top: 50rpx;
   color: #888;

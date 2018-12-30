@@ -13,12 +13,12 @@
       bindblur='blurTextArea'
       bindfocus='focusTextArea'
       value='{{noteObj.content}}'
-      maxlength='100000'
+      maxlength='10000'
+      style="height: {{taHeight + 'px'}}"
       />
-
-  <view class='btn-wrap'>
-    <!-- <button>编辑</button> -->
+  <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view>
+  <!-- <view class='btn-wrap'>
     <button class='btn-update btn' bindtap='updateNote'>更新</button>
     <button class='btn-delete btn' bindtap='deleteNote'>删除</button>
-  </view>
+  </view> -->
 </view>

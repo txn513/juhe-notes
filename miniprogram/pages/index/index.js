@@ -11,26 +11,35 @@ Page({
         requestResult: '',
         content: '',
         isFocus: false,
-        taHeight: 0
+        taHeight: 0,
+        isEditFlag: false,
+        noteID: ''
     },
-    onLoad(){
+    onLoad(option){
       var that = this;
-      wx.getUserInfo({
-        success: function (res) {
-          that.setData({
-            userInfo: res.userInfo,
-            logged: true
-          })
-        }
-      })
+
       wx.getSystemInfo({
         success: function(res) {
           console.log(res)
           that.setData({
-            taHeight: res.screenHeight*.75
+            taHeight: res.windowHeight
           })
         }
       })
+
+      //编辑模式
+      if (option.id) {  
+        this.setData({
+          isEditFlag: true,
+          noteID: option.id
+        });
+        wx.setNavigationBarTitle({
+          title: '编辑便签',
+        })
+        this.getNoteDetail();
+      }
+      
+      
     },
     blurTextArea(){
       this.setData({
@@ -50,8 +59,12 @@ Page({
     uploadNote(){
       //tableID: 39200
       
-      let content = this.data.content;
-      console.log(content)
+      let { content, isEditFlag} = this.data;
+      console.log(isEditFlag)
+      if (isEditFlag) {
+        this.updateEditedNote()
+        return;
+      }
 
       if (content.replace(/\s+/g, '') == ''){
         wx.showToast({
@@ -69,19 +82,21 @@ Page({
         .save()
         .then(res => {
           // success
+          console.log(res)
           this.setData({
-            content: ''
+            isEditFlag: true,
+            noteID: res.data._id
           });
           wx.showToast({
             title: '保存成功',
             icon: 'success'
           })
 
-          setTimeout(() => {
-            wx.navigateTo({
-              url: '/pages/allMyNotes/allMyNotes'
-            })
-          }, 1000)
+          // setTimeout(() => {
+          //   wx.navigateTo({
+          //     url: '/pages/allMyNotes/allMyNotes'
+          //   })
+          // }, 1000)
         }, err => {
           // err
         })
@@ -97,6 +112,54 @@ Page({
         // *Tips*：如果你的业务需要用户必须授权才可进行，由于微信的限制，10 分钟内不可再次弹出授权窗口，此时可以调用 [`wx.openSetting`](https://mp.weixin.qq.com/debug/wxadoc/dev/api/setting.html) 要求用户提供授权
       })
     },
+
+
+    //编辑函数
+  getNoteDetail(id) {
+    util.showBusy()
+    let tableID = 41764;
+    let MyTableObject = new wx.BaaS.TableObject(tableID)
+
+    MyTableObject.get(this.data.noteID).then(res => {
+      // success
+      // console.log(res)
+      let obj = res.data;
+      obj['created_at'] = new Date(obj['created_at'] * 1000).toLocaleString();
+      this.setData({
+        noteObj: obj,
+        content: obj.content
+      });
+      wx.hideLoading()
+    }, err => {
+      wx.hideLoading()
+      // err
+    })
+  },
+  updateEditedNote() {
+    let tableID = getApp().globalData.tableID;
+    let MyTableObject = new wx.BaaS.TableObject(tableID);
+    let MyRecord = MyTableObject.getWithoutData(this.data.noteID);
+    let { content} = this.data;
+    console.log(this.data.noteID)
+    
+    MyRecord.set({
+      'content': content
+    })
+
+    MyRecord.update().then(res => {
+      console.log(res)
+      wx.showToast({
+        title: '更新成功',
+        icon: 'success'
+      })
+      // success
+    }, err => {
+      // err
+    })
+  },
+
+
+
 
     // // 用户登录示例
     // login: function() {

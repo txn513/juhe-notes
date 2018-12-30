@@ -1,3 +1,6 @@
+.container {
+  position: relative;
+}
 .single-note-wrap {
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
@@ -39,17 +42,40 @@
   box-sizing: border-box;
   padding: 20rpx 20rpx 10rpx;
   width: 700rpx;
-  margin: 14px auto 0;
-  border-radius: 4px;
+  margin: 0 auto;
+  /* border-radius: 4px; */
   background: #fff;
-  box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee;
+  /* box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee; */
   font-weight: 200;
   text-align: left;
-  transition: all .5s;
+  /* transition: all .5s; */
   height: 800rpx;
   /* height: 800rpx; */
   overflow: hidden;
 }
-.xt-textarea.focus {
-  box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
+.xt-button-circle {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: block;
+  margin: 0 auto;
+  margin-top: 100rpx;
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 60rpx;
+  background: rgb(60, 152, 158) none repeat scroll 0% 0%;
+  box-shadow: 10rpx 20rpx 20rpx #eee, -10rpx 20rpx 20rpx #eee;
+  text-align: center;
+  line-height: 120rpx;
+  font-size: 14px;
+  color: #fff;
+  text-decoration: none;
+  user-select: none;
 }
+.xt-button-circle:active {
+  box-shadow: 5rpx 15rpx 10rpx #eee, -5rpx 15rpx 10rpx #eee;
+}
+/* .xt-textarea.focus {
+  box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
+} */

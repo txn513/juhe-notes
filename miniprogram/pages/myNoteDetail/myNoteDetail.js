@@ -5,14 +5,25 @@ Page({
     noteID: '',
     noteObj: {},
     content: '',
-    isFocus: false
+    isFocus: false,
+    taHeight: 0
   },
   onLoad: function (option) {
-    console.log(option.id)
+    // console.log(option.id)
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          taHeight: res.windowHeight
+        })
+      }
+    })
     this.setData({
       noteID: option.id
     });
     this.getNoteDetail();
+    
   },
   getNoteDetail(id){
     util.showBusy()
