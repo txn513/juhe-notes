@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view class="container" catchtouchmove='""'>
+<view class="container" bindtouchmove='preventScroll'>
     
 
     <view class="section">
@@ -12,7 +12,7 @@
       value='{{content}}'
       maxlength='10000'
       style="height: {{taHeight + 'px'}}"
-      catchtouchmove='""'
+      catchtouchmove='preventScroll'
       />
       <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view>
     </view>

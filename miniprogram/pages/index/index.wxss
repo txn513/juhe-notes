@@ -10,6 +10,7 @@ page {
 }
 .container {
   position: relative;
+  overflow: hidden;
 }
 .section {
   position: relative;
@@ -18,18 +19,17 @@ page {
 }
 .xt-textarea {
   box-sizing: border-box;
-  padding: 20rpx 20rpx 10rpx;
+  padding: 20rpx 0rpx 10rpx;
   width: 710rpx;
-  margin: 0 auto;
+  margin: 0 20rpx;
   /* border-radius: 4px; */
-  background: #fff;
+  /* background: #fff; */
   /* box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee; */
   font-weight: 200;
   text-align: left;
   
-  height: 600rpx;
-  overflow: hidden;
-  padding-bottom: 126rpx;
+  /* overflow: hidden; */
+  /* padding-bottom: 126rpx; */
 }
 /* .xt-textarea.focus {
   box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
