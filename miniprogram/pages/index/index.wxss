@@ -29,6 +29,7 @@ page {
   
   height: 600rpx;
   overflow: hidden;
+  padding-bottom: 126rpx;
 }
 /* .xt-textarea.focus {
   box-shadow:5rpx 10rpx 20rpx #cecece, -5rpx 0 20rpx #CECECE;
@@ -37,7 +38,7 @@ page {
 
 .xt-button-circle {
   position: absolute;
-  bottom: 2rem;
+  bottom: 120rpx;
   left: 50%;
   transform: translateX(-50%);
   display: block;
