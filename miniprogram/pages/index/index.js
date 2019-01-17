@@ -13,7 +13,8 @@ Page({
         isFocus: false,
         taHeight: 0,
         isEditFlag: false,
-        noteID: ''
+        noteID: '',
+        initCon: '', // 初始内容 - 用来对比修改内容
     },
     onLoad(option){
       var that = this;
@@ -55,11 +56,24 @@ Page({
       this.setData({
         content: e.detail.value
       })
+      let pages = getCurrentPages();  //获取页面栈实例
+      let prePage = pages[pages.length - 2];
+      prePage.setData({
+        needRefresh: true
+      })
     },
+
+    //提交
     uploadNote(){
       //tableID: 39200
       
-      let { content, isEditFlag} = this.data;
+      let { content, isEditFlag, initCon} = this.data;
+
+      if (content == initCon){
+        return;
+      }
+
+      
       console.log(isEditFlag)
       if (isEditFlag) {
         this.updateEditedNote()
@@ -87,19 +101,20 @@ Page({
             isEditFlag: true,
             noteID: res.data._id
           });
-          wx.showToast({
-            title: '保存成功',
-            icon: 'success'
-          })
-
-          // setTimeout(() => {
-          //   wx.navigateTo({
-          //     url: '/pages/allMyNotes/allMyNotes'
-          //   })
-          // }, 1000)
+          // wx.showToast({
+          //   title: '保存成功',
+          //   icon: 'success'
+          // })
         }, err => {
           // err
         })
+
+
+      // let pages = getCurrentPages();  //获取页面栈实例
+      // let prePage = pages[pages.length - 2];
+      // prePage.setData({
+      //   needRefresh: true
+      // })
       
     },
     userInfoHandler(data) {
@@ -127,7 +142,8 @@ Page({
       obj['created_at'] = new Date(obj['created_at'] * 1000).toLocaleString();
       this.setData({
         noteObj: obj,
-        content: obj.content
+        content: obj.content,
+        initCon: obj.content
       });
       wx.hideLoading()
     }, err => {
@@ -148,10 +164,10 @@ Page({
 
     MyRecord.update().then(res => {
       console.log(res)
-      wx.showToast({
-        title: '更新成功',
-        icon: 'success'
-      })
+      // wx.showToast({
+      //   title: '更新成功',
+      //   icon: 'success'
+      // })
       // success
     }, err => {
       // err
@@ -162,6 +178,16 @@ Page({
 
   },
 
+  onUnload(){
+    console.log('back')
+    this.uploadNote()
+    
+  },
+
+  onHide(){
+    console.log('hide')
+    this.uploadNote()
+  }
 
 
 

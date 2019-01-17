@@ -15,6 +15,10 @@ Page({
     preventMove: false,
     addAnimation: false,
     containerHeight: 0,
+
+    //更新参数
+    needRefresh: false,
+    
   },
   onLoad(){
     let that = this;
@@ -29,10 +33,19 @@ Page({
         })
       }
     })
+
+    this.getAllNotesAsync()
     // this.loop();
   },
   onShow(){
     // 
+    if (!this.data.needRefresh) {
+      return;
+    }
+    this.getAllNotesAsync()
+  },
+
+  getAllNotesAsync(){
     if (app.globalData.userID) {
       this.getAllNotes()
     } else {
@@ -43,7 +56,6 @@ Page({
       }
     }
   },
-
   // 获取便签列表
   getAllNotes(){
     util.showBusy()
@@ -69,7 +81,8 @@ Page({
       this.setData({
         notesList: list,
         listLen: list.length,
-        loaded: true
+        needRefresh: false
+        // loaded: true
       });
       wx.hideLoading()
     }, err => {
