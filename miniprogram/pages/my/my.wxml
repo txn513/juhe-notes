@@ -19,6 +19,12 @@
     </view>
     <view class='list'>
       <view class='list-item'>
+        <text>字体大小</text>
+        <text>中</text>
+      </view>
+    </view>
+    <view class='list'>
+      <view class='list-item'>
         <text>关于TT便签</text>
         <text>v1.1</text>
       </view>
