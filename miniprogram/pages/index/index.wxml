@@ -4,7 +4,7 @@
 
     <view class="section">
       <textarea 
-      class="xt-textarea {{isFocus? 'focus': ''}}" 
+      class="xt-textarea" 
       placeholder="请输入内容" 
       bindinput='getContent'
       bindblur='blurTextArea'
@@ -12,6 +12,7 @@
       value='{{content}}'
       maxlength='10000'
       auto-height="true"
+      auto-focus="{{isFocus}}"
       catchtouchmove='preventScroll'
       />
       <!-- <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view> -->

@@ -38,20 +38,27 @@ Page({
           title: '编辑便签',
         })
         this.getNoteDetail();
+      } else {//新建模式
+        this.setData({
+          isFocus: true
+        })
       }
+
+      
+
       
       
     },
-    blurTextArea(){
-      this.setData({
-        isFocus: false
-      });
-    },
-    focusTextArea(){
-      this.setData({
-        isFocus: true
-      });
-    },
+    // blurTextArea(){
+    //   this.setData({
+    //     isFocus: false
+    //   });
+    // },
+    // focusTextArea(){
+    //   this.setData({
+    //     isFocus: true
+    //   });
+    // },
     getContent(e){
       this.setData({
         content: e.detail.value
