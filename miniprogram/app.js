@@ -61,7 +61,8 @@ App({
           "text": "我"
         }
       ]
-    }
+    },
+    fontSize: 34
   },
     onLaunch: function () {
       if (!wx.cloud) {
