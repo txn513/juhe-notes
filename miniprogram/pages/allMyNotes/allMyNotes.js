@@ -43,6 +43,9 @@ Page({
     if (!app.globalData.listRefreshFlag) {
       return;
     }
+    this.setData({
+      notesList: []
+    })
     this.getAllNotesAsync()
   },
 
@@ -66,6 +69,7 @@ Page({
     let query = new wx.BaaS.Query()
     let id = getApp().globalData.userID
     query.compare('created_by', '=', id)
+    
 
     MyTableObject.setQuery(query).orderBy('-created_at').find().then(res => {
       // success
@@ -73,7 +77,8 @@ Page({
 
       let list = res.data.objects;
       list.forEach((value, index, arr) => {
-        arr[index]['created_at'] = new Date(arr[index]['created_at']*1000).toLocaleString()
+        // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
+        arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at']*1000))
         arr[index]['title'] = this.getNoteTitle(arr[index]['content'],0)
         arr[index]['subTitle'] = this.getNoteTitle(arr[index]['content'], 1)
       });
@@ -85,7 +90,7 @@ Page({
         // needRefresh: false
         // loaded: true
       });
-      app.globalData.listRefreshFlag = true
+      app.globalData.listRefreshFlag = false
       wx.hideLoading()
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新

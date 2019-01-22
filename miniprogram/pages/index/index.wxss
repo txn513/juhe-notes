@@ -18,8 +18,8 @@ page {
   padding: 0;
 }
 .xt-textarea {
-  box-sizing: content-box;
-  padding: 20rpx 0rpx 20rpx;
+  box-sizing: border-box;
+  padding: 20rpx 0rpx 0rpx;
   width: 710rpx;
   margin: 0 20rpx;
   /* border-radius: 4px; */
@@ -88,4 +88,9 @@ page {
 }
 .disable {
     color: #888;
+}
+.footer {
+  height: 100rpx;
+  width: 100%;
+  background: #fff;
 }

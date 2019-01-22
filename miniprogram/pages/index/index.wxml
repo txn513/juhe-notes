@@ -14,9 +14,11 @@
       auto-height="true"
       auto-focus="{{isFocus}}"
       catchtouchmove='preventScroll'
+      style='min-height: {{isEditFlag? 1:taHeight}}px'
       />
       <!-- <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view> -->
     </view>
+    <view class='footer' wx:if="{{isEditFlag}}"></view>
 
     <!-- <button bindtap="uploadNote" class='xt-button-circle'>提交</button> -->
     <!-- <view class='goToAllNotes'>
