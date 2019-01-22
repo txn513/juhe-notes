@@ -85,6 +85,8 @@ Page({
         // loaded: true
       });
       wx.hideLoading()
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
     }, err => {
       wx.hideLoading()
       // err
@@ -237,6 +239,9 @@ Page({
       }
     })
 
+  },
+  onPullDownRefresh(){
+    this.getAllNotesAsync()
   },
 
   

@@ -186,13 +186,13 @@ Page({
   },
 
   onUnload(){
-    console.log('back')
+    // console.log('back')
     this.uploadNote()
     
   },
 
   onHide(){
-    console.log('hide')
+    // console.log('hide')
     this.uploadNote()
   }
 
