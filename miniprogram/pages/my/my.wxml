@@ -17,12 +17,12 @@
         <text>我的便签</text>
       </navigator>
     </view>
-    <view class='list'>
+    <!-- <view class='list'>
       <view class='list-item'>
         <text>字体大小</text>
         <text>中</text>
       </view>
-    </view>
+    </view> -->
     <view class='list'>
       <view class='list-item'>
         <text>关于TT便签</text>

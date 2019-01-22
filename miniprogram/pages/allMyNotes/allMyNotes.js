@@ -17,7 +17,7 @@ Page({
     containerHeight: 0,
 
     //更新参数
-    needRefresh: false,
+    // needRefresh: false,
     
   },
   onLoad(){
@@ -39,7 +39,8 @@ Page({
   },
   onShow(){
     // 
-    if (!this.data.needRefresh) {
+    console.log(app.globalData.listRefreshFlag)
+    if (!app.globalData.listRefreshFlag) {
       return;
     }
     this.getAllNotesAsync()
@@ -81,9 +82,10 @@ Page({
       this.setData({
         notesList: list,
         listLen: list.length,
-        needRefresh: false
+        // needRefresh: false
         // loaded: true
       });
+      app.globalData.listRefreshFlag = true
       wx.hideLoading()
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
@@ -158,7 +160,7 @@ Page({
       }
       
     } else if(Math.abs(disY) >= 6 && !this.canMove){
-      console.log(222222)
+      // console.log(222222)
       this.canMove = false;
       this.setData({
         preventMove: true,

@@ -62,7 +62,8 @@ App({
         }
       ]
     },
-    fontSize: 34
+    fontSize: 34, // 字体大小
+    listRefreshFlag: false, // 便签列表刷新标识
   },
     onLaunch: function () {
       if (!wx.cloud) {

@@ -2,6 +2,7 @@
 // var qcloud = require('../../vendor/wafer2-client-sdk/index')
 // var config = require('../../config')
 var util = require('../../utils/util.js')
+const app = getApp()
 
 Page({
     data: {
@@ -63,11 +64,13 @@ Page({
       this.setData({
         content: e.detail.value
       })
-      let pages = getCurrentPages();  //获取页面栈实例
-      let prePage = pages[pages.length - 2];
-      prePage.setData({
-        needRefresh: true
-      })
+
+      app.globalData.listRefreshFlag = true
+      // let pages = getCurrentPages();  //获取页面栈实例
+      // let prePage = pages[pages.length - 2];
+      // prePage.setData({
+      //   needRefresh: true
+      // })
     },
 
     //提交
@@ -88,10 +91,10 @@ Page({
       }
 
       if (content.replace(/\s+/g, '') == ''){
-        wx.showToast({
-          title: '请输入内容',
-          icon: 'none'
-        })
+        // wx.showToast({
+        //   title: '请输入内容',
+        //   icon: 'none'
+        // })
         return
       }
       let tableID = 41764;
