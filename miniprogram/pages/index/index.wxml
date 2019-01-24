@@ -11,10 +11,10 @@
       bindfocus='focusTextArea'
       value='{{content}}'
       maxlength='10000'
-      auto-height="true"
+      auto-height="{{isEditFlag? true: false}}"
       auto-focus="{{isFocus}}"
       catchtouchmove='preventScroll'
-      style='min-height: {{isEditFlag? 1:taHeight}}px'
+      style='height: {{taHeight}}px'
       />
       <!-- <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view> -->
     </view>
