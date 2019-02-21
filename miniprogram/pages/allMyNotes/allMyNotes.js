@@ -39,14 +39,17 @@ Page({
   },
   onShow(){
     // 
-    console.log(app.globalData.listRefreshFlag)
+    // console.log(app.globalData.listRefreshFlag)
     if (!app.globalData.listRefreshFlag) {
       return;
     }
-    this.setData({
-      notesList: []
-    })
-    this.getAllNotesAsync()
+    
+    setTimeout(()=>{
+      this.setData({
+        notesList: []
+      })
+      this.getAllNotesAsync()
+    },300)
   },
 
   getAllNotesAsync(){
@@ -69,16 +72,17 @@ Page({
     let query = new wx.BaaS.Query()
     let id = getApp().globalData.userID
     query.compare('created_by', '=', id)
-    
+    let contentEndString = wx.getStorageSync('contentEndString')
 
-    MyTableObject.setQuery(query).orderBy('-created_at').find().then(res => {
+    MyTableObject.setQuery(query).orderBy('-updated_at').find().then(res => {
       // success
       console.log(res)
 
       let list = res.data.objects;
       list.forEach((value, index, arr) => {
         // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
-        arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at']*1000))
+        arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at'] * 1000))
+        arr[index]['updated_at'] = util.formatTime(new Date(arr[index]['updated_at']*1000))
         arr[index]['title'] = this.getNoteTitle(arr[index]['content'],0)
         arr[index]['subTitle'] = this.getNoteTitle(arr[index]['content'], 1)
       });
@@ -90,6 +94,7 @@ Page({
         // needRefresh: false
         // loaded: true
       });
+      //---------
       app.globalData.listRefreshFlag = false
       wx.hideLoading()
       wx.hideNavigationBarLoading() //完成停止加载
@@ -152,7 +157,7 @@ Page({
     // console.log(dis)
 
     if (Math.abs(disY) < 6 || this.canMove) {
-      console.log(111111)
+      // console.log(111111)
       if (Math.abs(dis) <= this.data.deleteBtnWidth && dis > 4) {
         this.canMove = true
         this.setData({

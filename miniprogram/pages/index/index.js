@@ -17,7 +17,7 @@ Page({
         noteID: '',
         initCon: '', // 初始内容 - 用来对比修改内容
     },
-    onLoad(option){
+    onLoad(options){
       var that = this;
 
       wx.getSystemInfo({
@@ -30,10 +30,10 @@ Page({
       })
 
       //编辑模式
-      if (option.id) {  
+      if (options.id) {  
         this.setData({
           isEditFlag: true,
-          noteID: option.id
+          noteID: options.id
         });
         wx.setNavigationBarTitle({
           title: '编辑便签',
@@ -46,15 +46,17 @@ Page({
       }
 
       
+      
 
       
       
     },
-    // blurTextArea(){
-    //   this.setData({
-    //     isFocus: false
-    //   });
-    // },
+    blurTextArea(){
+      // this.setData({
+      //   isFocus: false
+      // });
+      this.uploadNote()
+    },
     // focusTextArea(){
     //   this.setData({
     //     isFocus: true
@@ -65,7 +67,7 @@ Page({
         content: e.detail.value
       })
 
-      app.globalData.listRefreshFlag = true
+      
       // let pages = getCurrentPages();  //获取页面栈实例
       // let prePage = pages[pages.length - 2];
       // prePage.setData({
@@ -78,25 +80,29 @@ Page({
       //tableID: 39200
       
       let { content, isEditFlag, initCon} = this.data;
+      // let storedList = wx.getStorageSync('notesList');
 
+      // 未作修改
       if (content == initCon){
         return;
       }
 
-      
-      console.log(isEditFlag)
+      // 输入空情况
+      if (content.replace(/\s+/g, '') == '') {
+        return
+      }
+
+      app.globalData.listRefreshFlag = true
+      let conLen = content.length;
+      let contentEndString = content.substring(conLen - 10, conLen)
+      wx.setStorageSync('contentEndString', contentEndString)
+
+      // 编辑模式
       if (isEditFlag) {
         this.updateEditedNote()
         return;
       }
 
-      if (content.replace(/\s+/g, '') == ''){
-        // wx.showToast({
-        //   title: '请输入内容',
-        //   icon: 'none'
-        // })
-        return
-      }
       let tableID = 41764;
       let Notes = new wx.BaaS.TableObject(tableID);
       let note = Notes.create(); // 创建一条记录
@@ -111,10 +117,6 @@ Page({
             isEditFlag: true,
             noteID: res.data._id
           });
-          // wx.showToast({
-          //   title: '保存成功',
-          //   icon: 'success'
-          // })
         }, err => {
           // err
         })
@@ -166,7 +168,7 @@ Page({
     let MyTableObject = new wx.BaaS.TableObject(tableID);
     let MyRecord = MyTableObject.getWithoutData(this.data.noteID);
     let { content} = this.data;
-    console.log(this.data.noteID)
+    // console.log(this.data.noteID)
     
     MyRecord.set({
       'content': content
@@ -191,7 +193,7 @@ Page({
   onUnload(){
     // console.log('back')
     this.uploadNote()
-    
+   
   },
 
   onHide(){

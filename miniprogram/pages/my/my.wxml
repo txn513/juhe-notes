@@ -8,7 +8,7 @@
       <open-data class="user-nick" type="userNickName"></open-data>
     </view>
     <view class='inner'>
-      <navigator url='/pages/index/index' class='inner_item' hover-class='none'>
+      <navigator url='/pages/index/index?from=1' class='inner_item' hover-class='none'>
         <image class='icon' src='/images/my/my_create_note.png'></image>
         <text>写便签</text>
       </navigator>

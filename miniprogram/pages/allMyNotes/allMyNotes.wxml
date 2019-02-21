@@ -24,7 +24,7 @@
         <view class='single-note-sub' wx:if="{{item.subTitle}}">
           <text space="nbsp" class='single-note-content' >{{item.subTitle}}</text>
         </view>
-        <view class='single-note-bottom single-note-date'>{{item.created_at}}</view> 
+        <view class='single-note-bottom single-note-date'>{{item.updated_at}}</view> 
         <view class='single-note-delete' catchtap='deleteNote' data-id="{{item._id}}">删除</view>
       </view>
       
