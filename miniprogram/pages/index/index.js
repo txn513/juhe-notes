@@ -16,8 +16,10 @@ Page({
         isEditFlag: false,
         noteID: '',
         initCon: '', // 初始内容 - 用来对比修改内容
+      isShared: false
     },
     onLoad(options){
+      console.log(options)
       var that = this;
 
       wx.getSystemInfo({
@@ -39,17 +41,30 @@ Page({
           title: '编辑便签',
         })
         this.getNoteDetail();
+        wx.showShareMenu({
+          withShareTicket: true
+        })
       } else {//新建模式
         this.setData({
           isFocus: true
         })
       }
 
+     if (options.isShared == 1) {
+       this.setData({
+         isShared: true
+       })
+       wx.setNavigationBarTitle({
+         title: 'TT便签',
+       })
+       app.globalData.listRefreshFlag = true
+     }
       
-      
-
-      
-      
+    },
+    onShareAppMessage(){
+      return {
+        path: 'pages/allMyNotes/allMyNotes?noteID='+ this.data.noteID + '&isShared=1'
+      }
     },
     blurTextArea(){
       // this.setData({

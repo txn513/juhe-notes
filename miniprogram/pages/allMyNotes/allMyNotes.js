@@ -24,7 +24,7 @@ Page({
     // needRefresh: false,
     
   },
-  onLoad(){
+  onLoad(options){
     let that = this;
     app.editTabbar();
     app.hidetabbar();
@@ -38,7 +38,15 @@ Page({
       }
     })
 
+    if (options.isShared == '1') {
+      wx.navigateTo({
+        url: '/pages/index/index?id=' + options.noteID + '&isShared=1' + '&userID=' + app.globalData.userID,
+      })
+      return;
+    }
     this.getAllNotesAsync()
+
+    
     // this.loop();
   },
   

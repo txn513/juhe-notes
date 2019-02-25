@@ -65,7 +65,7 @@ App({
     fontSize: 34, // 字体大小
     listRefreshFlag: false, // 便签列表刷新标识
   },
-    onLaunch: function () {
+    onLaunch: function (options) {
       if (!wx.cloud) {
         console.error('请使用 2.2.3 或以上的基础库以使用云能力')
       } else {
@@ -98,6 +98,11 @@ App({
       }, res => {
         // 登录失败
       })
+
+      
         // qcloud.setLoginUrl(config.service.loginUrl)
+    },
+    onShow(options){
+      console.log(options)
     }
 })
