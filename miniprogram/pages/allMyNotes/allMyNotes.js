@@ -15,7 +15,11 @@ Page({
     preventMove: false,
     addAnimation: false,
     containerHeight: 0,
-
+    pageNum: 0, // 分页数
+    numPerPage: 20, // 每页条数
+    totalCount: 0,  // 总条数
+    tempDelObj: {},
+    tempDelNum: 0
     //更新参数
     // needRefresh: false,
     
@@ -37,20 +41,7 @@ Page({
     this.getAllNotesAsync()
     // this.loop();
   },
-  onShow(){
-    // 
-    // console.log(app.globalData.listRefreshFlag)
-    if (!app.globalData.listRefreshFlag) {
-      return;
-    }
-    
-    setTimeout(()=>{
-      this.setData({
-        notesList: []
-      })
-      this.getAllNotesAsync()
-    },300)
-  },
+  
 
   getAllNotesAsync(){
     if (app.globalData.userID) {
@@ -74,10 +65,10 @@ Page({
     query.compare('created_by', '=', id)
     let contentEndString = wx.getStorageSync('contentEndString')
 
-    MyTableObject.setQuery(query).orderBy('-updated_at').find().then(res => {
+    MyTableObject.setQuery(query).orderBy('-updated_at').limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       // success
+     
       console.log(res)
-
       let list = res.data.objects;
       list.forEach((value, index, arr) => {
         // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
@@ -89,11 +80,13 @@ Page({
       // console.log(list)
       // this.getNoteTitle(list[0].content)
       this.setData({
-        notesList: list,
-        listLen: list.length,
+        notesList: this.data.notesList.concat(list),
+        listLen: this.data.notesList.concat(list).length,
+        totalCount: res.data.meta.total_count
         // needRefresh: false
         // loaded: true
       });
+      
       //---------
       app.globalData.listRefreshFlag = false
       wx.hideLoading()
@@ -102,6 +95,13 @@ Page({
     }, err => {
       wx.hideLoading()
       // err
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.stopPullDownRefresh() //停止下拉刷新
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none',
+        duration: 2000
+      })
     })
   },
   getNoteTitle(con, idx){
@@ -176,25 +176,7 @@ Page({
         preventMove: true,
         preventScroll: false
       })
-    }
-    
-    // if (Math.abs(dis) <= this.data.deleteBtnWidth && dis > 0) {
-    //   if (Math.abs(disY) < 2) {
-    //     this.setData({
-    //       addAnimation: false,
-    //       preventScroll: true,
-    //       itemLeft: dis,
-    //     })
-    //   }
-      
-    // } else {
-      
-    //   this.setData({
-    //     preventScroll: false,
-    //     addAnimation: true
-    //   })
-    // }
-   
+    } 
     
   },
   itemTouchEnd(e) { 
@@ -223,7 +205,9 @@ Page({
   deleteNote(e) {
     let MyTableObject = new wx.BaaS.TableObject(getApp().globalData.tableID);
     let that = this;
-    let noteID = e.currentTarget.dataset.id
+    let noteID = e.currentTarget.dataset.id;
+    let idx = e.currentTarget.dataset.index;
+    let { tempDelObj, tempDelNum } = this.data;
     console.log(noteID)
     wx.showModal({
       title: '提示',
@@ -238,12 +222,21 @@ Page({
               title: '删除成功',
               icon: 'success'
             })
-            that.getAllNotes()
+            console.log(idx)
+            tempDelObj[idx] = true
+            // that.getAllNotes()
             that.setData({
               itemLeft: 0,
+              tempDelObj,
+              tempDelNum: tempDelNum + 1
             })
           }, err => {
             // err
+            wx.showToast({
+              title: '网络异常',
+              icon: 'none',
+              duration: 2000
+            })
           })
         } else if (res.cancel) {
 
@@ -252,9 +245,38 @@ Page({
     })
 
   },
+
+  reset(){
+    this.setData({
+      notesList: [],
+      tempDelObj: {},
+      pageNum: 0,
+      tempDelNum: 0
+    })
+  },
+  onShow() {
+    if (!app.globalData.listRefreshFlag) {
+      return;
+    }
+    setTimeout(() => {
+      this.reset()
+      this.getAllNotesAsync()
+    }, 300)
+  },
   onPullDownRefresh(){
+    this.reset()
     this.getAllNotesAsync()
   },
-
+  onReachBottom(){
+    let { pageNum, totalCount, numPerPage} = this.data; 
+    // 到达最后一页
+    if (Math.floor(totalCount / numPerPage) < (pageNum+1)) {
+      return
+    }
+    this.setData({
+      pageNum: this.data.pageNum + 1
+    })
+    this.getAllNotesAsync()
+  }
   
 })

@@ -161,6 +161,11 @@ Page({
     }, err => {
       wx.hideLoading()
       // err
+      wx.showToast({
+        title: '网络异常',
+        icon: 'none',
+        duration: 2000
+      })
     })
   },
   updateEditedNote() {

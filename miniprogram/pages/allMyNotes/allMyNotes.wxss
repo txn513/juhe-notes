@@ -15,7 +15,7 @@ page {
 }
 .container .wrap {
   margin-top: 2rpx;
-  background: #fff;
+  
   width: 100%;
 }
 .create-new-btn {
@@ -31,7 +31,7 @@ page {
 .single-note-wrap {
   position: relative;
   box-sizing: border-box;
-  
+  background: #fff;
   /* width: 720rpx; */
   width: 100%;
   /* margin: 0 0 0 30rpx; */
