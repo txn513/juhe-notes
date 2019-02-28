@@ -17,8 +17,10 @@
       style='height: {{taHeight}}px'
       disabled='{{isShared}}'
       />
+      
       <!-- <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view> -->
     </view>
+    <!-- <cover-view class='tools'></cover-view> -->
     <view class='footer' wx:if="{{isEditFlag}}"></view>
 
     <!-- <button bindtap="uploadNote" class='xt-button-circle'>提交</button> -->

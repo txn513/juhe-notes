@@ -1,5 +1,6 @@
 page {
-  background: #f6f6f6;
+  background: #f6f6f6; 
+  /* 37989f */
 }
 .container {
   position: relative;
