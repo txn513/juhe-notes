@@ -16,7 +16,10 @@ Page({
         isEditFlag: false,
         noteID: '',
         initCon: '', // 初始内容 - 用来对比修改内容
-      isShared: false
+      isShared: false,
+      animationData: {},
+      toolsWidth: 0, //工具栏宽度
+      arrowWrapWidth: 0, //
     },
     onLoad(options){
       console.log(options)
@@ -59,7 +62,30 @@ Page({
        })
        app.globalData.listRefreshFlag = true
      }
+
+
+     // 动画初始化
+      this.getToolsInfo()
+      const animation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'ease',
+      })
+
+      this.animation = animation
       
+    },
+    // 获取工具相关尺寸
+    getToolsInfo(){
+      wx.createSelectorQuery().selectAll('.tools').boundingClientRect(rect => {
+        this.setData({
+          toolsWidth: rect[0].width
+        })
+      }).exec() 
+      wx.createSelectorQuery().selectAll('.tools-item-1').boundingClientRect(rect => {
+        this.setData({
+          arrowWrapWidth: rect[0].width
+        })
+      }).exec()  
     },
     onShareAppMessage(){
       return {
@@ -203,6 +229,20 @@ Page({
       // success
     }, err => {
       // err
+    })
+  },
+
+  // 
+  toolsTap(){
+    console.log('111')
+    this.toolsHide()
+  },
+  // 工具栏点击动画
+  toolsHide(){
+    let { toolsWidth , arrowWrapWidth } = this.data
+    this.animation.translateX(toolsWidth - arrowWrapWidth).step()
+    this.setData({
+      animationData: this.animation.export()
     })
   },
 

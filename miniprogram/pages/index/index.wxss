@@ -97,11 +97,23 @@ page {
   background: #fff;
 }
 .tools {
+  display: flex;
+  align-items: center;
   position: absolute;
   width: 200rpx;
   height: 80rpx;
-  background: gray;
+  /* background: gray; */
   right: 0;
   bottom: 200rpx;
-
+}
+.tools-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80rpx;
+  height: 80rpx;
+}
+.tools .arrow {
+  width: 60rpx;
+  height: 60rpx;
 }
