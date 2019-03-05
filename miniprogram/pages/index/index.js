@@ -65,27 +65,55 @@ Page({
 
 
      // 动画初始化
-      this.getToolsInfo()
+
       const animation = wx.createAnimation({
         duration: 500,
         timingFunction: 'ease',
       })
-
       this.animation = animation
+      this.getToolsInfo().then(res => {
+        console.log(res)
+        let toolsWidth = res[0].width
+        let arrowWrapWidth = res[1].width
+        this.setData({
+          toolsWidth,
+          arrowWrapWidth
+        })
+        console.log(toolsWidth)
+        animation.translateX(toolsWidth - arrowWrapWidth).step()
+        animation.opacity(1).step()
+        this.setData({
+          animationData: animation.export()
+        })
+      })
       
     },
     // 获取工具相关尺寸
     getToolsInfo(){
-      wx.createSelectorQuery().selectAll('.tools').boundingClientRect(rect => {
-        this.setData({
-          toolsWidth: rect[0].width
+
+      return new Promise((resolve, reject)=>{
+        let query = wx.createSelectorQuery()
+        query.select('.tools').boundingClientRect();
+        query.select('.tools-item-1').boundingClientRect();
+        query.exec(res => {
+          resolve(res)
         })
-      }).exec() 
-      wx.createSelectorQuery().selectAll('.tools-item-1').boundingClientRect(rect => {
-        this.setData({
-          arrowWrapWidth: rect[0].width
-        })
-      }).exec()  
+      })
+
+
+      
+
+      // query.selectAll('.tools').boundingClientRect(rect => {
+      //   console.log(rect)
+      //   this.setData({
+      //     toolsWidth: rect[0].width
+      //   })
+      // }).exec() 
+      // query.selectAll('.tools-item-1').boundingClientRect(rect => {
+      //   this.setData({
+      //     arrowWrapWidth: rect[0].width
+      //   })
+      // }).exec()  
     },
     onShareAppMessage(){
       return {
@@ -234,10 +262,16 @@ Page({
 
   // 
   toolsTap(){
-    console.log('111')
-    this.toolsHide()
+    this.toolsShow()
   },
   // 工具栏点击动画
+  toolsShow(){
+    let { toolsWidth, arrowWrapWidth } = this.data
+    this.animation.translateX(0).step()
+    this.setData({
+      animationData: this.animation.export()
+    })
+  },
   toolsHide(){
     let { toolsWidth , arrowWrapWidth } = this.data
     this.animation.translateX(toolsWidth - arrowWrapWidth).step()

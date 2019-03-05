@@ -105,6 +105,7 @@ page {
   /* background: gray; */
   right: 0;
   bottom: 200rpx;
+  opacity: 0;
 }
 .tools-item {
   display: flex;

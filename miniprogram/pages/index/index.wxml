@@ -24,6 +24,9 @@
       <cover-view class='tools-item tools-item-1'>
         <cover-image class='arrow' src='/images/back.png'></cover-image>
       </cover-view>
+      <cover-view class='tools-item tools-item-2'>
+        <cover-image class='arrow' src='/images/share.png'></cover-image>
+      </cover-view>
     </cover-view>
     <view class='footer' wx:if="{{isEditFlag}}"></view>
 
