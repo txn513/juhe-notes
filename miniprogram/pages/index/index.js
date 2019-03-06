@@ -20,6 +20,8 @@ Page({
       animationData: {},
       toolsWidth: 0, //工具栏宽度
       arrowWrapWidth: 0, //
+      conNotEmpty: false,
+      toolExpand: false
     },
     onLoad(options){
       console.log(options)
@@ -38,7 +40,8 @@ Page({
       if (options.id) {  
         this.setData({
           isEditFlag: true,
-          noteID: options.id
+          noteID: options.id,
+          conNotEmpty: true
         });
         wx.setNavigationBarTitle({
           title: '编辑便签',
@@ -65,7 +68,12 @@ Page({
 
 
      // 动画初始化
+      this.initTool()
+      
+      
+    },
 
+    initTool(){
       const animation = wx.createAnimation({
         duration: 500,
         timingFunction: 'ease',
@@ -86,7 +94,6 @@ Page({
           animationData: animation.export()
         })
       })
-      
     },
     // 获取工具相关尺寸
     getToolsInfo(){
@@ -132,8 +139,17 @@ Page({
     //   });
     // },
     getContent(e){
+      // 输入空情况
+      if (e.detail.value.replace(/\s+/g, '') == '') {
+        this.setData({
+          conNotEmpty: false
+        })
+        return
+      }
+
       this.setData({
-        content: e.detail.value
+        content: e.detail.value,
+        conNotEmpty: true
       })
 
       
@@ -210,7 +226,7 @@ Page({
     },
 
 
-    //编辑函数
+    //获取编辑函数
   getNoteDetail(id) {
     util.showBusy()
     let tableID = 41764;
@@ -224,7 +240,7 @@ Page({
       this.setData({
         noteObj: obj,
         content: obj.content,
-        initCon: obj.content
+        initCon: obj.content,
       });
       wx.hideLoading()
     }, err => {
@@ -262,21 +278,31 @@ Page({
 
   // 
   toolsTap(){
-    this.toolsShow()
+    let { toolExpand } = this.data;
+    console.log(toolExpand)
+    if (!toolExpand) {
+      this.toolsShow()
+    } else {
+      this.toolsHide()
+    }
+   
+    
   },
   // 工具栏点击动画
   toolsShow(){
     let { toolsWidth, arrowWrapWidth } = this.data
     this.animation.translateX(0).step()
     this.setData({
-      animationData: this.animation.export()
+      animationData: this.animation.export(),
+      toolExpand: true
     })
   },
   toolsHide(){
     let { toolsWidth , arrowWrapWidth } = this.data
     this.animation.translateX(toolsWidth - arrowWrapWidth).step()
     this.setData({
-      animationData: this.animation.export()
+      animationData: this.animation.export(),
+      toolExpand: false
     })
   },
 

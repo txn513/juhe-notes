@@ -100,11 +100,11 @@ page {
   display: flex;
   align-items: center;
   position: absolute;
-  width: 200rpx;
+  width: 260rpx;
   height: 80rpx;
   /* background: gray; */
   right: 0;
-  bottom: 200rpx;
+  bottom: 100rpx;
   opacity: 0;
 }
 .tools-item {

@@ -20,9 +20,12 @@
       
       <!-- <cover-view catchtap="uploadNote" class='xt-button-circle'>提交</cover-view> -->
     </view>
-    <cover-view class='tools' catchtap='toolsTap' animation="{{animationData}}">
+    <cover-view style='visibility: {{conNotEmpty? "visible": "hidden"}}; opacity: {{conNotEmpty? 1: 0}};'  class='tools' catchtap='toolsTap' animation="{{animationData}}">
       <cover-view class='tools-item tools-item-1'>
         <cover-image class='arrow' src='/images/back.png'></cover-image>
+      </cover-view>
+      <cover-view class='tools-item tools-item-2'>
+        <cover-image class='arrow' src='/images/unmark.png'></cover-image>
       </cover-view>
       <cover-view class='tools-item tools-item-2'>
         <cover-image class='arrow' src='/images/share.png'></cover-image>

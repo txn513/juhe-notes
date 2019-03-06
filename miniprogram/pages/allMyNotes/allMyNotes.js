@@ -101,6 +101,7 @@ Page({
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
     }, err => {
+      console.log(err)
       wx.hideLoading()
       // err
       wx.hideNavigationBarLoading() //完成停止加载
