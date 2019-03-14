@@ -90,9 +90,9 @@ Page({
       this.setData({
         notesList: this.data.notesList.concat(list),
         listLen: this.data.notesList.concat(list).length,
-        totalCount: res.data.meta.total_count
+        totalCount: res.data.meta.total_count,
         // needRefresh: false
-        // loaded: true
+        loaded: true
       });
       
       //---------

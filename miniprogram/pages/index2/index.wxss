@@ -4,7 +4,7 @@ page {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    /* height: 100%; */
+    height: 100%;
 }
 .animation {
   transition: all .5s;
@@ -12,6 +12,7 @@ page {
 .container {
   position: relative;
   overflow: hidden;
+  height: 100%;
 }
 .section {
   position: relative;
@@ -101,6 +102,7 @@ page {
   position: absolute;
   width: 260rpx;
   height: 80rpx;
+  /* background: gray; */
   right: 0;
   bottom: 100rpx;
   opacity: 0;
