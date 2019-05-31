@@ -42,5 +42,6 @@
         "selectedColor": "#666666"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

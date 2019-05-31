@@ -1,6 +1,6 @@
 {
-  "miniprogramRoot": "miniprogram/",
-  "cloudfunctionRoot": "cloudfunctions/",
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
 	"packOptions": {
 		"ignore": []
 	},
@@ -14,8 +14,10 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.2",
 	"appid": "wx4bbad1749485de8a",
-	"projectname": "notes",
+	"projectname": "notes-current",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
