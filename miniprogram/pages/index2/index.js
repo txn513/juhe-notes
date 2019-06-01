@@ -22,6 +22,8 @@ Page({
       arrowWrapWidth: 0, //
       conNotEmpty: false,
       toolExpand: false,
+      tagName: '',
+      tagId: ''
     },
     onLoad(options){
       // console.log(options)
@@ -36,6 +38,16 @@ Page({
         }
       })
 
+      if (options.tagName) {
+        this.setData({
+          tagName: options.tagName
+        })
+      }
+      if (options.tagId) {
+        this.setData({
+          tagId: options.tagId
+        })
+      }
       //编辑模式
       if (options.id) {  
         this.setData({
@@ -184,6 +196,9 @@ Page({
       
 
       app.globalData.listRefreshFlag = true
+      if (this.tagId) {
+        app.globalData.tagListItemRefreshFlag = true
+      }
       let conLen = content.length;
       let contentEndString = content.substring(conLen - 10, conLen)
       wx.setStorageSync('contentEndString', contentEndString)
@@ -194,12 +209,16 @@ Page({
         return;
       }
 
-      let tableID = 41764;
+      let tableID = 75704;
       let Notes = new wx.BaaS.TableObject(tableID);
       let note = Notes.create(); // 创建一条记录
 
 
-      note.set({ content })
+      note.set({ 
+        content,
+        'tagId': this.data.tagId,
+        'tagName': this.data.tagName,
+      })
         .save()
         .then(res => {
           // success
@@ -236,7 +255,7 @@ Page({
     //获取编辑函数
   getNoteDetail(id) {
     util.showBusy()
-    let tableID = 41764;
+    let tableID = 75704;
     let MyTableObject = new wx.BaaS.TableObject(tableID)
 
     MyTableObject.get(this.data.noteID).then(res => {

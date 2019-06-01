@@ -19,6 +19,12 @@ Page({
     app.hidetabbar();
   },  
 
+  goTo(e) {
+    let url = e.currentTarget.dataset.url;
+    wx.switchTab({
+      url
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -29,7 +35,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.globalData.addNoteMode = ''
   },
 
   /**
@@ -63,7 +69,15 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: 'TT便签-一个极简便签小程序',
+      path: '/pages/index/main',
+      imageUrl: '/images/share-note.png'
+    }
+  },
 })

@@ -1,0 +1,6 @@
+<view class='container'>
+  <input class='input' type='text' bindinput='getName' maxlength='10' placeholder='请输入文件夹名称（不超过10个字）'></input>
+  <view class='ad {{isIphoneX? "iphoneX": ""}}'><ad unit-id="adunit-785cd35edee6d688"></ad></view>
+  <!-- <view class='ad'><ad unit-id="adunit-5f226e5b28d9bd8f"></ad></view> -->
+  <button catchtap='submit' class='{{isIphoneX? "iphoneX": ""}} submit'>完成</button>
+</view>

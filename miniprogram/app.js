@@ -36,7 +36,8 @@ App({
   },
   globalData: {
     userID: '',
-    tableID: 41764,
+    tableID: 41764,//41764  75704
+    tagTableID: 75652,
     tabBar: {
       "backgroundColor": "#ffffff",
       "color": "#979795",
@@ -49,10 +50,22 @@ App({
           "text": "首页"
         },
         {
+          "pagePath": "/pages/tags/tags",
+          "iconPath": "icon/icon_tag.png",
+          "selectedIconPath": "icon/icon_tag_HL.png",
+          "text": "文件夹"
+        },
+        {
           "pagePath": "/pages/index/index",
           "iconPath": "icon/icon_release.png",
           "isSpecial": true,
           "text": "新建"
+        },
+        {
+          "pagePath": "/pages/marks/marks",
+          "text": "收藏",
+          "iconPath": "icon/icon_mark.png",
+          "selectedIconPath": "icon/icon_mark_HL.png",
         },
         {
           "pagePath": "/pages/my/my",
@@ -63,7 +76,13 @@ App({
       ]
     },
     fontSize: 34, // 字体大小
-    listRefreshFlag: false, // 便签列表刷新标识
+    listRefreshFlag: true, // 便签列表刷新标识
+    tagAddNewNInsert: false, // 新建文件夹并插入便签，从移到文件夹按钮跳转则为true
+    tagListRefreshFlag: true,
+    tagListItemRefreshFlag: true,
+    markListRefreshFlag: true,
+    // addNoteInTag: false,
+    addNoteMode: '', // 新增便签模式 空-全局, tag-标签, mark-收藏
   },
     onLaunch: function (options) {
       if (!wx.cloud) {

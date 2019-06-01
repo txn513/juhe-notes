@@ -49,8 +49,9 @@
 }
 .special-wrapper{
   position: absolute;
-  left: 77rpx;
+  /* left: 50%; */
   top: -36rpx;
+  /* margin-left: -48rpx; */
   width: 84rpx;
   height: 84rpx;
   border-radius: 50%;

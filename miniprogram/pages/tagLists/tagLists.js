@@ -22,14 +22,12 @@ Page({
     tempDelObj: {},
     tempDelNum: 0,
     showMask: false,
+    isMarked: false
     //更新参数
     // needRefresh: false,
 
-    //控制弹出选项
-    isMarked: false,
-    isTaged: false
   },
-  onLoad(options){
+  onLoad(options) {
     let that = this;
     app.editTabbar();
     app.hidetabbar();
@@ -37,44 +35,40 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          deleteBtnWidth: res.windowWidth/750*150,
+          deleteBtnWidth: res.windowWidth / 750 * 150,
           containerHeight: res.windowHeight
         })
       }
     })
 
-    if (options.isShared == '1') {
-      wx.navigateTo({
-        url: '/pages/index/index?id=' + options.noteID + '&isShared=1' + '&userID=' + app.globalData.userID,
-      })
-      return;
-    }
+    this.tagId = options.id
+    // this.title = options.title
+    this.title = options.title
+    
+    // if (options.isShared == '1') {
+    //   wx.navigateTo({
+    //     url: '/pages/index/index?id=' + options.noteID + '&isShared=1' + '&userID=' + app.globalData.userID,
+    //   })
+    //   return;
+    // }
     // this.getAllNotesAsync()
 
-    
+    console.log('taglist')
+    this.setData({
+      notesList: []
+    })
     // this.loop();
   },
-  goAddTag(){ // tag
-    app.globalData.insertNoteId = this.noteID;
-    wx.switchTab({
-      url: '../tags/tags'
-    })
-    this.setData({
-      showMask: false
-    })
-  },
-  showTagNMark(e){  // mark
+
+  addTagNMark(e) {
     console.log(e)
     this.noteID = e.currentTarget.dataset.id;
+    this.idx = e.currentTarget.dataset.index;
     this.tagId = e.currentTarget.dataset.tagid;
-    this.mark = e.currentTarget.dataset.mark;
     this.noteTitle = e.currentTarget.dataset.notetitle;
-    console.log(this.mark)
-    // if (this.tagId) {
-    //   this.setData({
-    //     isTaged: true
-    //   })
-    // }
+    this.mark = e.currentTarget.dataset.mark;
+    console.log(this.idx)
+
     if (this.mark == '1') {
       this.setData({
         isMarked: true
@@ -88,12 +82,22 @@ Page({
       showMask: true
     })
   },
-  hideMask(){
+  hideMask() {
     this.setData({
       showMask: false
     })
   },
-  goMark(e){   // 收藏或取消
+  goAddTag() { // tag
+    app.globalData.insertNoteId = this.noteID;
+    wx.switchTab({
+      url: '../tags/tags'
+    })
+
+    this.setData({
+      showMask: false
+    })
+  },
+  goMark(e) {
     console.log(this.noteID)
     let Note = MyTableObject.get(this.noteID)
     Note.then(res => {
@@ -101,7 +105,6 @@ Page({
       if (this.data.isMarked) { // 取消收藏
         note.set({
           'mark': 0,
-          // 'modified_at': new Date(res.data.updated_at * 1000).getTime()
         })
         note.update().then(res => {
           wx.showToast({
@@ -136,13 +139,11 @@ Page({
         })
       }
     })
-    
-    
     this.setData({
       showMask: false
     })
   },
-  getAllNotesAsync(){
+  getAllNotesAsync() {
     if (app.globalData.userID) {
       this.getAllNotes()
     } else {
@@ -154,7 +155,7 @@ Page({
     }
   },
   // 获取便签列表
-  getAllNotes(){
+  getAllNotes() {
     util.showBusy()
     let that = this;
     // let tableID = 41764;
@@ -162,15 +163,14 @@ Page({
     let query = new wx.BaaS.Query()
     let id = getApp().globalData.userID
     query.compare('created_by', '=', id)
-    // let contentEndString = wx.getStorageSync('contentEndString')
+    query.compare('tagId', '=', this.tagId)
 
-    MyTableObject.setQuery(query).orderBy(['-modified_at', '-created_at']).limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
+    MyTableObject.setQuery(query).orderBy('-updated_at').limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       // success
-     
+
       console.log(res)
       let list = res.data.objects;
       list.forEach((value, index, arr) => {
-        // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
         let todayDate = new Date()
         let todayYear = todayDate.getFullYear();
         let todayMonth = todayDate.getMonth();
@@ -191,13 +191,13 @@ Page({
             arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at'] * 1000)).yearOnly
           }
         }
-        
+        // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
         // arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at'] * 1000))
         // arr[index]['updated_at'] = util.formatTime(new Date(arr[index]['updated_at'] * 1000))
         // if (arr[index]['modified_at']) {
         //   arr[index]['modified_at'] = util.formatTime(new Date(arr[index]['modified_at']))
         // }
-        arr[index]['title'] = this.getNoteTitle(arr[index]['content'],0)
+        arr[index]['title'] = this.getNoteTitle(arr[index]['content'], 0)
         arr[index]['subTitle'] = this.getNoteTitle(arr[index]['content'], 1)
       });
       // console.log(list)
@@ -209,9 +209,20 @@ Page({
         // needRefresh: false
         loaded: true
       });
-      
+
+      if (this.data.notesList.concat(list) && this.data.notesList.concat(list).length > 0) {
+        wx.setNavigationBarTitle({
+          title: this.title
+        })
+      } else {
+        wx.setNavigationBarTitle({
+          title: '新建便签'
+        })
+      }
+
       //---------
-      app.globalData.listRefreshFlag = false
+      // app.globalData.listRefreshFlag = false
+      // app.globalData.tagListItemRefreshFlag = false
       wx.hideLoading()
       wx.hideNavigationBarLoading() //完成停止加载
       wx.stopPullDownRefresh() //停止下拉刷新
@@ -228,7 +239,7 @@ Page({
       })
     })
   },
-  getNoteTitle(con, idx){
+  getNoteTitle(con, idx) {
     // let tr = con.match(/(.+)\n/g);
     let tr = con.split('\n')
     if (tr.length > 1 && tr[1] != '') {
@@ -237,15 +248,15 @@ Page({
     } else {
       return tr[idx]
     }
-    
+
   },
-  createNew(){
+  createNew() {
     wx.navigateTo({
-      url: '../index/index'
+      url: '../index/index?tagId=' + this.tagId + '&tagName=' + this.title
     })
   },
   // 跳转详情
-  goToDetail(e){
+  goToDetail(e) {
     console.log(e)
     wx.navigateTo({
       url: '../index/index?id=' + e.currentTarget.dataset.id
@@ -253,10 +264,10 @@ Page({
   },
 
   //滑动
-  itemTouchStart(e) { 
-    let { itemLeft,moveIdx} = this.data;
+  itemTouchStart(e) {
+    let { itemLeft, moveIdx } = this.data;
     let index = e.currentTarget.dataset.index;
-    
+
     if (moveIdx != index) {
       this.setData({
         // moveIdx: index,
@@ -269,13 +280,13 @@ Page({
       preventScroll: false,
       preventMove: false,
     })
-    
+
     this.startX = e.touches[0].clientX + this.data.itemLeft;
     this.startY = e.touches[0].clientY
-    
+
   },
-  itemTouchMove(e) { 
-    
+  itemTouchMove(e) {
+
     let dis = this.startX - e.touches[0].clientX
     let disY = this.startY - e.touches[0].clientY
     // console.log(dis)
@@ -290,22 +301,22 @@ Page({
           preventMove: false,
           itemLeft: dis,
         })
-        
+
       }
-      
-    } else if(Math.abs(disY) >= 6 && !this.canMove){
+
+    } else if (Math.abs(disY) >= 6 && !this.canMove) {
       // console.log(222222)
       this.canMove = false;
       this.setData({
         preventMove: true,
         preventScroll: false
       })
-    } 
-    
+    }
+
   },
-  itemTouchEnd(e) { 
+  itemTouchEnd(e) {
     let { deleteBtnWidth, itemLeft } = this.data;
-    let half = deleteBtnWidth/2
+    let half = deleteBtnWidth / 2
     this.setData({
       addAnimation: true
     })
@@ -320,9 +331,9 @@ Page({
         preventScroll: false
       })
     }
-    
+
   },
-  preventScroll(){
+  preventScroll() {
 
   },
 
@@ -346,8 +357,12 @@ Page({
               title: '删除成功',
               icon: 'success'
             })
-            console.log(idx)
+            // console.log(idx)
             app.globalData.listRefreshFlag = true
+            app.globalData.tagListItemRefreshFlag = true
+            app.globalData.markListItemRefreshFalg = true
+            that.reset()
+            that.getAllNotesAsync()
             tempDelObj[idx] = true
             // that.getAllNotes()
             that.setData({
@@ -371,7 +386,7 @@ Page({
 
   },
 
-  reset(){
+  reset() {
     this.setData({
       notesList: [],
       tempDelObj: {},
@@ -380,23 +395,23 @@ Page({
     })
   },
   onShow() {
-    if (!app.globalData.listRefreshFlag) {
+    console.log(app.globalData.tagListItemRefreshFlag)
+    if (!app.globalData.tagListItemRefreshFlag) {
       return;
     }
     setTimeout(() => {
       this.reset()
       this.getAllNotesAsync()
-      
     }, 300)
   },
-  onPullDownRefresh(){
+  onPullDownRefresh() {
     this.reset()
     this.getAllNotesAsync()
   },
-  onReachBottom(){
-    let { pageNum, totalCount, numPerPage} = this.data; 
+  onReachBottom() {
+    let { pageNum, totalCount, numPerPage } = this.data;
     // 到达最后一页
-    if (Math.floor(totalCount / numPerPage) < (pageNum+1)) {
+    if (Math.floor(totalCount / numPerPage) < (pageNum + 1)) {
       return
     }
     this.setData({
@@ -415,5 +430,5 @@ Page({
       imageUrl: '/images/share-note.png'
     }
   }
-  
+
 })

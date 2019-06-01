@@ -63,8 +63,65 @@ page {
   height: 100rpx;
   background: #fff;
   padding: 0 40rpx;
+  align-items: center;
+}
+.list-item .icon-wrap {
+  display: flex;
+  align-items: center;
+}
+.list-item .icon {
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 16rpx;
+}
+.list-item .goto {
+  height: 30rpx;
+  width: 30rpx;
 }
 .list-item text {
   font-size: 28rpx;
   line-height: 100rpx;
+}
+
+
+/* .ad {
+  width: 690rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+} */
+
+.share-wrap {
+		position: relative;
+		width: 400rpx;
+		height: 100rpx;
+		line-height: 400upx;
+		border: none;
+		background: #3c989e;
+		color: #fff;
+		border-radius: 10rpx;
+		overflow: hidden;	
+		display: inline-block;
+		margin-top: 60rpx;
+  
+}
+.share-wrap	.share-text {
+			height: 100%;
+			line-height: 100rpx;
+			text-align: center;
+		}
+.share-wrap	.share-btn {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			opacity: 0;
+			z-index: 99;
+			top: 0;
+		}
+
+.version-info {
+	text-align: center;
+	color: #888;
+	font-size: 30rpx;
+	margin-top: 20rpx;
+  margin-bottom: 60rpx;
 }

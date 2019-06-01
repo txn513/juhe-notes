@@ -1,3 +1,4 @@
+/* miniprogram/pages/tagLists/tagLists.wxss */
 page {
   background: #f6f6f6; 
   /* 37989f */
@@ -55,7 +56,6 @@ page {
   height: 100%;
   width: 100%;
   z-index: 10000;
-  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,12 +80,33 @@ page {
 .mask .content-item:last-child {
   border-bottom: none;
 }
-
 .share-wrap	.share-btn {
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			opacity: 0;
-			z-index: 99;
-			top: 0;
-		}
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  z-index: 99;
+  top: 0;
+}
+
+.add-new {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+  background: #fff;
+  /* border: 1rpx solid #999; */
+  box-shadow: 2rpx 0rpx 10rpx 5rpx #ccc;
+  position: fixed;
+  bottom: 134rpx;
+  right: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-new.iphoneX {
+  bottom: 200rpx;
+}
+.add-new .icon {
+  width: 60rpx;
+  height: 60rpx;
+}

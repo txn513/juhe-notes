@@ -19,10 +19,22 @@ Component({
             "text": "首页"
           },
           {
+            "pagePath": "/pages/index/index",
+            "iconPath": "icon/icon_home.png",
+            "selectedIconPath": "icon/icon_home_HL.png",
+            "text": "首页"
+          },
+          {
             "pagePath": "/pages/middle/middle",
             "iconPath": "icon/icon_release.png",
             "isSpecial": true,
             "text": "新建"
+          },
+          {
+            "pagePath": "/pages/mine/mine",
+            "iconPath": "icon/icon_mine.png",
+            "selectedIconPath": "icon/icon_mine_HL.png",
+            "text": "我"
           },
           {
             "pagePath": "/pages/mine/mine",

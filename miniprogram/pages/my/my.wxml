@@ -24,11 +24,31 @@
       </view>
     </view> -->
     <view class='list'>
-      <view class='list-item'>
-        <text>关于TT便签</text>
-        <text>v1.1.2</text>
+      <view class='list-item' catchtap='goTo' data-url="/pages/tags/tags">
+        <view class='icon-wrap'>
+          <image src='/tabbarComponent/icon/icon_tag_HL.png' class='icon'></image>
+          <text>我的文件夹</text>
+        </view>
+        <view><image class='goto' src='/images/goto.png'></image></view>
       </view>
     </view>
-    <ad unit-id="adunit-5f226e5b28d9bd8f"></ad>
+    <view class='list'>
+      <view class='list-item' catchtap='goTo' data-url="/pages/marks/marks">
+        <view class='icon-wrap'>
+          <image src='/tabbarComponent/icon/icon_mark_HL.png' class='icon'></image>
+          <text>我的收藏</text>
+        </view>
+        <view><image class='goto' src='/images/goto.png'></image></view>
+      </view>
+    </view>
+    <view class='share-wrap'>
+				<view class="share-text">分享给好友</view>
+				<button open-type='share' class="share-btn"></button>
+			</view>
+
+      <div class='version-info'>
+					v1.1.2
+			</div>
+    <view class='ad'><ad unit-id="adunit-5f226e5b28d9bd8f"></ad></view>
 </view>
 <tabbar tabbar="{{tabbar}}"></tabbar>

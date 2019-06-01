@@ -4,6 +4,8 @@
 var util = require('../../utils/util.js')
 const app = getApp()
 
+let MyTableObject = new wx.BaaS.TableObject(app.globalData.tableID)
+
 Page({
     data: {
         userInfo: {},
@@ -22,6 +24,8 @@ Page({
       arrowWrapWidth: 0, //
       conNotEmpty: false,
       toolExpand: false,
+      tagName: '',
+      tagId: ''
     },
     onLoad(options){
       // console.log(options)
@@ -36,6 +40,18 @@ Page({
         }
       })
 
+
+      if (options.tagName) {
+        console.log(options.tagName)
+        this.setData({
+          tagName: options.tagName
+        })
+      }
+      if (options.tagId) {
+        this.setData({
+          tagId: options.tagId
+        })
+      }
       //编辑模式
       if (options.id) {  
         this.setData({
@@ -72,7 +88,10 @@ Page({
       
       
     },
-
+    onShow(){
+      app.globalData.addNoteMode = ''
+      
+    },
     initTool(){
       const animation = wx.createAnimation({
         duration: 500,
@@ -182,8 +201,12 @@ Page({
       })
 
       
-
       app.globalData.listRefreshFlag = true
+      app.globalData.markListRefreshFlag = true;
+      if (this.tagId) {
+        app.globalData.tagListItemRefreshFlag = true
+      }
+      
       let conLen = content.length;
       let contentEndString = content.substring(conLen - 10, conLen)
       wx.setStorageSync('contentEndString', contentEndString)
@@ -194,16 +217,20 @@ Page({
         return;
       }
 
-      let tableID = 41764;
-      let Notes = new wx.BaaS.TableObject(tableID);
-      let note = Notes.create(); // 创建一条记录
+      // let tableID = 75708;
+      // let Notes = new wx.BaaS.TableObject(tableID);
+      let note = MyTableObject.create(); // 创建一条记录
 
 
-      note.set({ content })
+      note.set({ 
+        content, 
+        'modified_at': new Date().getTime(),
+        'tagId': this.data.tagId,
+        'tagName': this.data.tagName
+      })
         .save()
         .then(res => {
           // success
-          console.log(res)
           this.setData({
             isEditFlag: true,
             noteID: res.data._id,
@@ -236,8 +263,8 @@ Page({
     //获取编辑函数
   getNoteDetail(id) {
     util.showBusy()
-    let tableID = 41764;
-    let MyTableObject = new wx.BaaS.TableObject(tableID)
+    // let tableID = 75708;
+    // let MyTableObject = new wx.BaaS.TableObject(tableID)
 
     MyTableObject.get(this.data.noteID).then(res => {
       // success
@@ -262,13 +289,19 @@ Page({
   },
   updateEditedNote() {
     let tableID = getApp().globalData.tableID;
-    let MyTableObject = new wx.BaaS.TableObject(tableID);
+    // let MyTableObject = new wx.BaaS.TableObject(tableID);
     let MyRecord = MyTableObject.getWithoutData(this.data.noteID);
+
+    // ---------------------all
+    // let allRecord = MyTableObject.getWithoutData({});
+
+    // ----------------------all-end
+    // console.log(allRecord)
     let { content} = this.data;
     // console.log(this.data.noteID)
-    
     MyRecord.set({
-      'content': content
+      'content': content,
+      'modified_at': new Date().getTime()
     })
 
     MyRecord.update().then(res => {
