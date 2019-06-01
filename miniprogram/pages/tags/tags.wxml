@@ -2,42 +2,37 @@
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/> -->
 
 <view class='container {{isIphoneX? "iphoneX": ""}}'>
+  <view class='add-wrap' wx:if="{{!adError || !adClose}}">
+    <view class='ad'>
+      <ad unit-id="adunit-32d6aab46df348fd" binderror="adError" bindclose="adClose"></ad>
+    </view>
+  </view>
   <view class='wrap' wx:if="{{listLen > 0}}" style="margin-bottom: 20rpx;">
     <view 
     class='single-note-wrap'  
-    wx:for="{{notesList}}" 
+    wx:for="{{tagList}}" 
     wx:key="_id"
     catchtouchmove='{{preventScroll? "preventScroll":""}}'
     >
       <view 
       class='single-note-cover {{(addAnimation || moveIdx!=index)? "ainimation": ""}}'
       bindtap='goToDetail'
-      bindlongpress='showTagNMark' 
       data-id="{{item._id}}" 
       data-index="{{index}}"
-      data-tagid="{{item.tagId}}"
-      data-mark="{{item.mark}}"
-      data-notetitle="{{item.title}}"
+      data-title="{{item.title}}"
       bindtouchstart='itemTouchStart'
       bindtouchmove='{{preventMove? "preventScroll":"itemTouchMove"}}'
       bindtouchend='itemTouchEnd'
       style='{{moveIdx == index? "transform:translate(-"+ itemLeft + "px)":""}}'
       wx:if="{{!tempDelObj[index]}}">
         <view class='single-note-top'>
+          <image src='/images/tag.png' class='icon'></image>
           <text space="nbsp" class='single-note-content' >{{item.title}}</text>
         </view>
-        <view class='single-note-sub' wx:if="{{item.subTitle}}">
+        <!-- <view class='single-note-sub' wx:if="{{item.subTitle}}">
           <text space="nbsp" class='single-note-content' >{{item.subTitle}}</text>
-        </view>
-        <view class='single-note-bottom single-note-date'>
-          <view class='left'>
-            <view class='tag' wx:if="{{item.tagName}}">{{item.tagName}}</view>
-            <view class=''>{{item.modified_at || item.created_at}}</view>
-          </view>
-          <view class='right' wx:if="{{item.mark == 1}}">
-            <image src='/images/mark.png' class='icon'></image>
-          </view>
-        </view> 
+        </view> -->
+        <!-- <view class='single-note-bottom single-note-date'></view>  -->
         <view class='single-note-delete' catchtap='deleteNote' data-id="{{item._id}}" data-index="{{index}}">删除</view>
       </view>
       
@@ -45,17 +40,20 @@
     <!-- <view class='end-line'>---我是有底线的---</view> -->
   </view>
   <view wx:elif="{{listLen <= 0 && loaded}}" class='no-note'>
-    <button class='create-new-btn'  bindtap='createNew'>新建一个便签</button>
+    <view class='create-new-btn' style="background: none; color: #999;">
+      <text style='text-align: center; width: 100%; display: inline-block'>当前没有文件夹 \n 点击右下角按钮添加文件夹</text>
+    
+    </view>
+  </view>
+
+  <view class='add-new {{isIphoneX? "iphoneX": ""}}' bindtap='createNew'>
+    <image src='/images/tag.png' class='icon'></image>
   </view>
 <view class='mask' wx:if="{{showMask}}" bindtap='hideMask'>
   <view class='content'>
-    <view class='content-item' catchtap='goMark' wx:if="{{isMarked}}">取消收藏</view>
-    <view class='content-item' catchtap='goMark' wx:else>收藏</view>
-    <view class='content-item' catchtap="goAddTag">移到文件夹</view>
-    <view class='content-item share-wrap'>
-    转发
-    <button open-type='share' class="share-btn"></button>
-    </view>
+    <view class='content-item' catchtap='goMark'>收藏</view>
+    <view class='content-item'>移到文件夹</view>
+    <view class='content-item'>转发</view>
   </view>
 </view>
 </view>

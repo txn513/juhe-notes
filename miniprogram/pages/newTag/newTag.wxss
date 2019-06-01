@@ -1,0 +1,38 @@
+/* miniprogram/pages/newTag/newTag.wxss */
+.container {
+  text-align: center;
+}
+.input {
+  width: 690rpx;
+  height: 200rpx;
+  /* padding-bottom: 10rpx; */
+  border-bottom: 3rpx solid #f6f6f6;
+  margin-bottom: 100rpx;
+}
+.submit {
+  position: fixed;
+  left: 50%;
+  bottom: 20rpx;
+  width: 300rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin-left: -150rpx;
+  background: #3c989e;
+  border: none;
+  color: #fff;
+  font-size: 40rpx;
+
+}
+.submit.iphoneX {
+  bottom: 86rpx;
+}
+.ad {
+  position: fixed;
+  bottom: 140rpx;
+  left: 50%;
+  transform: translateX(-50%);
+
+}
+.ad.iphoneX {
+  bottom: 206rpx;
+}

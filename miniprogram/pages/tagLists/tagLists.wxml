@@ -12,7 +12,7 @@
       <view 
       class='single-note-cover {{(addAnimation || moveIdx!=index)? "ainimation": ""}}'
       bindtap='goToDetail'
-      bindlongpress='showTagNMark' 
+      bindlongpress='addTagNMark' 
       data-id="{{item._id}}" 
       data-index="{{index}}"
       data-tagid="{{item.tagId}}"
@@ -31,7 +31,7 @@
         </view>
         <view class='single-note-bottom single-note-date'>
           <view class='left'>
-            <view class='tag' wx:if="{{item.tagName}}">{{item.tagName}}</view>
+            <!-- <view class='tag' wx:if="{{item.tagName}}">{{item.tagName}}</view> -->
             <view class=''>{{item.modified_at || item.created_at}}</view>
           </view>
           <view class='right' wx:if="{{item.mark == 1}}">
@@ -43,13 +43,18 @@
       
     </view>
     <!-- <view class='end-line'>---我是有底线的---</view> -->
+    <view class='add-new {{isIphoneX? "iphoneX": ""}}' bindtap='createNew'>
+    <image src='/images/add.png' class='icon'></image>
+    </view>
   </view>
   <view wx:elif="{{listLen <= 0 && loaded}}" class='no-note'>
     <button class='create-new-btn'  bindtap='createNew'>新建一个便签</button>
   </view>
+
+  
 <view class='mask' wx:if="{{showMask}}" bindtap='hideMask'>
   <view class='content'>
-    <view class='content-item' catchtap='goMark' wx:if="{{isMarked}}">取消收藏</view>
+     <view class='content-item' catchtap='goMark' wx:if="{{isMarked}}">取消收藏</view>
     <view class='content-item' catchtap='goMark' wx:else>收藏</view>
     <view class='content-item' catchtap="goAddTag">移到文件夹</view>
     <view class='content-item share-wrap'>

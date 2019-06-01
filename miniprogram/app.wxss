@@ -10,3 +10,109 @@ view,image,text,navigator{
   padding:0;
   margin:0;
 }
+
+
+/* 便签列表样式 */
+.single-note-wrap {
+  position: relative;
+  box-sizing: border-box;
+  background: #fff;
+  /* width: 720rpx; */
+  width: 100%;
+  /* margin: 0 0 0 30rpx; */
+  /* border-radius: 4px; */
+  /* background: #fff; */
+  /* box-shadow: 5rpx 10rpx 20rpx #eee,-5rpx 0 20rpx #eee; */
+  font-weight: 400;
+  text-align: left;
+  overflow: hidden;
+}
+.single-note-cover {
+  position: relative;
+  /* position: absolute; */
+  padding: 20rpx 40rpx 10rpx 0;
+  margin-left: 40rpx;
+  width: 710rpx;
+  border-bottom: 3rpx solid #f6f6f6;
+}
+.single-note-wrap:last-child .single-note-cover {
+  border-bottom: none;
+}
+.single-note-delete {
+  position: absolute;
+  display: flex;
+  width: 150rpx;
+  height: 100%;
+  right: -150rpx;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  background: #fd4938;
+  color: #fff;
+  z-index: 50;
+}
+.single-note-top {
+  /* max-height: 400rpx; */
+  
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.single-note-top text {
+  /* line-height: 50rpx; */
+  font-weight: 500;
+  display: inline-block;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #232323;
+  font-size: 30rpx;
+}
+.single-note-sub {
+  height: 40rpx;
+  line-height: 30rpx;
+  text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+   color: #888;
+}
+.single-note-sub text{
+  line-height: 40rpx;
+  font-size: 22rpx;
+  
+  
+}
+.single-note-date {
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 12px;
+  position: relative;
+  color: #888;
+  display: flex;
+  justify-content: space-between;
+}
+.single-note-date .left {
+  display: flex;
+}
+.single-note-date .right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.single-note-date .right .icon {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 60rpx;
+}
+.single-note-date .tag {
+  margin-right: 20rpx;
+  color: #3c989e;
+}
+
+.ad {
+  width: 690rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}

@@ -3,7 +3,11 @@
     "pages/allMyNotes/allMyNotes",
     "pages/index/index",
     "pages/myNoteDetail/myNoteDetail",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/tags/tags",
+    "pages/marks/marks",
+    "pages/newTag/newTag",
+    "pages/tagLists/tagLists"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -19,7 +23,15 @@
     "list": [
       {
         "pagePath": "pages/allMyNotes/allMyNotes",
-        "text": "便签",
+        "text": "首页",
+        "iconPath": "/images/home.png",
+        "selectedIconPath": "/images/home_active.png",
+        "color": "#333333",
+        "selectedColor": "#666666"
+      },
+      {
+        "pagePath": "pages/tags/tags",
+        "text": "标签",
         "iconPath": "/images/home.png",
         "selectedIconPath": "/images/home_active.png",
         "color": "#333333",
@@ -28,6 +40,14 @@
       {
         "pagePath": "pages/my/my",
         "text": "新建",
+        "iconPath": "/images/new_note.png",
+        "selectedIconPath": "/images/new_note.png",
+        "color": "#333333",
+        "selectedColor": "#666666"
+      },
+      {
+        "pagePath": "pages/marks/marks",
+        "text": "收藏",
         "iconPath": "/images/new_note.png",
         "selectedIconPath": "/images/new_note.png",
         "color": "#333333",

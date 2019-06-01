@@ -6,7 +6,11 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return {
+    fullDate: [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute].map(formatNumber).join(':'),
+    yearOnly: [year, month, day].map(formatNumber).join('/'),
+    hourOnly: [hour, minute].map(formatNumber).join(':')
+  }
 }
 
 const formatNumber = n => {
@@ -65,9 +69,22 @@ const ifGotOpenid = (app, callback) => {
     // });
   }
 }
+
+function getNoteTitle(con, idx){
+  // let tr = con.match(/(.+)\n/g);
+  let tr = con.split('\n')
+  if (tr.length > 1 && tr[1] != '') {
+    // console.log(tr)
+    return tr[idx].replace(/(^\s*)|(\s*$)/g, "")
+  } else {
+    return tr[idx]
+  }
+
+}
 module.exports = {
   formatTime: formatTime,
   showBusy,
   getOpenid,
-  ifGotOpenid
+  ifGotOpenid,
+  getNoteTitle
 }

@@ -1,4 +1,7 @@
 let util = require('../../utils/util.js')
+let app = getApp()
+let MyTableObject = new wx.BaaS.TableObject(app.globalDatatableID)
+
 //test
 Page({
   data: {
@@ -27,8 +30,8 @@ Page({
   },
   getNoteDetail(id){
     util.showBusy()
-    let tableID = 41764;
-    let MyTableObject = new wx.BaaS.TableObject(tableID)
+    // let tableID = 41764;
+    // let MyTableObject = new wx.BaaS.TableObject(tableID)
 
     // let query1 = new wx.BaaS.Query()
     // query1.compare('id', '=', this.data.noteID)

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的文件夹",
+  "usingComponents": {
+    "tabbar": "../../tabbarComponent/tabbar"
+  }
+}
