@@ -22,8 +22,6 @@ Page({
     tempDelObj: {},
     tempDelNum: 0,
     showMask: false,
-    //更新参数
-    // needRefresh: false,
 
     //控制弹出选项
     isMarked: false,
@@ -49,10 +47,6 @@ Page({
       })
       return;
     }
-    // this.getAllNotesAsync()
-
-    
-    // this.loop();
   },
   goAddTag(){ // tag
     app.globalData.insertNoteId = this.noteID;
@@ -63,18 +57,13 @@ Page({
       showMask: false
     })
   },
-  showTagNMark(e){  // mark
+  showTagNMark(e){  // 显示功能弹窗
     console.log(e)
     this.noteID = e.currentTarget.dataset.id;
     this.tagId = e.currentTarget.dataset.tagid;
     this.mark = e.currentTarget.dataset.mark;
     this.noteTitle = e.currentTarget.dataset.notetitle;
-    console.log(this.mark)
-    // if (this.tagId) {
-    //   this.setData({
-    //     isTaged: true
-    //   })
-    // }
+
     if (this.mark == '1') {
       this.setData({
         isMarked: true
@@ -101,15 +90,13 @@ Page({
       if (this.data.isMarked) { // 取消收藏
         note.set({
           'mark': 0,
-          // 'modified_at': new Date(res.data.updated_at * 1000).getTime()
         })
         note.update().then(res => {
           wx.showToast({
             title: '取消成功',
             icon: 'success'
           })
-          this.reset()
-          this.getAllNotesAsync()
+          this.getAllNotesAsync(1)
           app.globalData.markListRefreshFlag = true
         }, err => {
           wx.showToast({
@@ -125,8 +112,7 @@ Page({
             title: '收藏成功',
             icon: 'success'
           })
-          this.reset()
-          this.getAllNotesAsync()
+          this.getAllNotesAsync(1)
           app.globalData.markListRefreshFlag = true
         }, err => {
           wx.showToast({
@@ -142,32 +128,35 @@ Page({
       showMask: false
     })
   },
-  getAllNotesAsync(){
+  getAllNotesAsync(reset){
     if (app.globalData.userID) {
-      this.getAllNotes()
+      this.getAllNotes(reset)
     } else {
       app.userCallback = userId => {
         if (userId) {
-          this.getAllNotes()
+          this.getAllNotes(reset)
         }
       }
     }
   },
   // 获取便签列表
-  getAllNotes(){
+  getAllNotes(reset){
     util.showBusy()
     let that = this;
     // let tableID = 41764;
     // let MyTableObject = new wx.BaaS.TableObject(tableID)
     let query = new wx.BaaS.Query()
     let id = getApp().globalData.userID
+
+    if (reset && reset == 1) {
+      this.reset()
+    }
     query.compare('created_by', '=', id)
     // let contentEndString = wx.getStorageSync('contentEndString')
 
     MyTableObject.setQuery(query).orderBy(['-modified_at', '-created_at']).limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       // success
      
-      console.log(res)
       let list = res.data.objects;
       list.forEach((value, index, arr) => {
         // arr[index]['created_at'] = new Date(arr[index]['created_at'] * 1000).toLocaleString()
@@ -177,7 +166,6 @@ Page({
         let todayDay = todayDate.getDay()
         if (arr[index]['modified_at']) {
           let getDate = new Date(arr[index]['modified_at'])
-          console.log()
           if (todayYear == getDate.getFullYear() && (todayMonth == getDate.getMonth()) && todayDay == getDate.getDay()) {
             arr[index]['modified_at'] = util.formatTime(new Date(arr[index]['modified_at'])).hourOnly
           } else {
@@ -192,21 +180,25 @@ Page({
           }
         }
         
-        // arr[index]['created_at'] = util.formatTime(new Date(arr[index]['created_at'] * 1000))
-        // arr[index]['updated_at'] = util.formatTime(new Date(arr[index]['updated_at'] * 1000))
-        // if (arr[index]['modified_at']) {
-        //   arr[index]['modified_at'] = util.formatTime(new Date(arr[index]['modified_at']))
-        // }
-        arr[index]['title'] = this.getNoteTitle(arr[index]['content'],0)
-        arr[index]['subTitle'] = this.getNoteTitle(arr[index]['content'], 1)
+       
+        arr[index]['title'] = util.getNoteTitle(arr[index]['content'],0)
+        arr[index]['subTitle'] = util.getNoteTitle(arr[index]['content'], 1)
       });
-      // console.log(list)
-      // this.getNoteTitle(list[0].content)
+
+      if (reset && reset == 1) {
+        this.setData({
+          notesList: list,
+          listLen: list.length
+        });
+      } else {
+        this.setData({
+          notesList: this.data.notesList.concat(list),
+          listLen: this.data.notesList.concat(list).length
+        });
+      }
+
       this.setData({
-        notesList: this.data.notesList.concat(list),
-        listLen: this.data.notesList.concat(list).length,
         totalCount: res.data.meta.total_count,
-        // needRefresh: false
         loaded: true
       });
       
@@ -228,18 +220,8 @@ Page({
       })
     })
   },
-  getNoteTitle(con, idx){
-    // let tr = con.match(/(.+)\n/g);
-    let tr = con.split('\n')
-    if (tr.length > 1 && tr[1] != '') {
-      // console.log(tr)
-      return tr[idx].replace(/(^\s*)|(\s*$)/g, "")
-    } else {
-      return tr[idx]
-    }
-    
-  },
-  createNew(){
+  // 新建便签
+  createNew(){  
     wx.navigateTo({
       url: '../index/index'
     })
@@ -327,7 +309,6 @@ Page({
   },
 
   deleteNote(e) {
-    // let MyTableObject = new wx.BaaS.TableObject(getApp().globalData.tableID);
     let that = this;
     let noteID = e.currentTarget.dataset.id;
     let idx = e.currentTarget.dataset.index;
@@ -380,18 +361,17 @@ Page({
     })
   },
   onShow() {
+    console.log('index.js')
     if (!app.globalData.listRefreshFlag) {
       return;
     }
     setTimeout(() => {
-      this.reset()
-      this.getAllNotesAsync()
+      this.getAllNotesAsync(1)
       
     }, 300)
   },
   onPullDownRefresh(){
-    this.reset()
-    this.getAllNotesAsync()
+    this.getAllNotesAsync(1)
   },
   onReachBottom(){
     let { pageNum, totalCount, numPerPage} = this.data; 

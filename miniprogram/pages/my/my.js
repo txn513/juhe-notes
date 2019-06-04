@@ -76,7 +76,7 @@ Page({
     }
     return {
       title: 'TT便签-一个极简便签小程序',
-      path: '/pages/index/main',
+      path: '/pages/allMyNotes/allMyNotes',
       imageUrl: '/images/share-note.png'
     }
   },

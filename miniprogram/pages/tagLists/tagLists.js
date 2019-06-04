@@ -53,7 +53,6 @@ Page({
     // }
     // this.getAllNotesAsync()
 
-    console.log('taglist')
     this.setData({
       notesList: []
     })
@@ -111,8 +110,8 @@ Page({
             title: '取消成功',
             icon: 'success'
           })
-          this.reset()
-          this.getAllNotesAsync()
+          // this.reset()
+          this.getAllNotesAsync(1)
           app.globalData.markListRefreshFlag = true
         }, err => {
           wx.showToast({
@@ -128,8 +127,8 @@ Page({
             title: '收藏成功',
             icon: 'success'
           })
-          this.reset()
-          this.getAllNotesAsync()
+          // this.reset()
+          this.getAllNotesAsync(1)
           app.globalData.markListRefreshFlag = true
         }, err => {
           wx.showToast({
@@ -143,19 +142,19 @@ Page({
       showMask: false
     })
   },
-  getAllNotesAsync() {
+  getAllNotesAsync(reset) {
     if (app.globalData.userID) {
-      this.getAllNotes()
+      this.getAllNotes(reset)
     } else {
       app.userCallback = userId => {
         if (userId) {
-          this.getAllNotes()
+          this.getAllNotes(reset)
         }
       }
     }
   },
   // 获取便签列表
-  getAllNotes() {
+  getAllNotes(reset) {
     util.showBusy()
     let that = this;
     // let tableID = 41764;
@@ -164,8 +163,10 @@ Page({
     let id = getApp().globalData.userID
     query.compare('created_by', '=', id)
     query.compare('tagId', '=', this.tagId)
-
-    MyTableObject.setQuery(query).orderBy('-updated_at').limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
+    if (reset && reset == 1) {
+      this.reset()
+    }
+    MyTableObject.setQuery(query).orderBy(['-modified_at', '-created_at']).limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       // success
 
       console.log(res)
@@ -202,11 +203,19 @@ Page({
       });
       // console.log(list)
       // this.getNoteTitle(list[0].content)
+      if (reset && reset == 1) {
+        this.setData({
+          notesList: list,
+          listLen: list.length
+        });
+      } else {
+        this.setData({
+          notesList: this.data.notesList.concat(list),
+          listLen: this.data.notesList.concat(list).length
+        });
+      }
       this.setData({
-        notesList: this.data.notesList.concat(list),
-        listLen: this.data.notesList.concat(list).length,
         totalCount: res.data.meta.total_count,
-        // needRefresh: false
         loaded: true
       });
 
@@ -361,8 +370,8 @@ Page({
             app.globalData.listRefreshFlag = true
             app.globalData.tagListItemRefreshFlag = true
             app.globalData.markListItemRefreshFalg = true
-            that.reset()
-            that.getAllNotesAsync()
+            // that.reset()
+            that.getAllNotesAsync(1)
             tempDelObj[idx] = true
             // that.getAllNotes()
             that.setData({
@@ -400,13 +409,13 @@ Page({
       return;
     }
     setTimeout(() => {
-      this.reset()
-      this.getAllNotesAsync()
+      // this.reset()
+      this.getAllNotesAsync(1)
     }, 300)
   },
   onPullDownRefresh() {
-    this.reset()
-    this.getAllNotesAsync()
+    // this.reset()
+    this.getAllNotesAsync(1)
   },
   onReachBottom() {
     let { pageNum, totalCount, numPerPage } = this.data;

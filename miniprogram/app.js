@@ -2,6 +2,7 @@
 // var qcloud = require('./vendor/wafer2-client-sdk/index')
 // var config = require('./config')
 let util = require('./utils/util.js');
+// let app = getApp()
 App({
   editTabbar: function () {
     let tabbar = this.globalData.tabBar;
@@ -122,6 +123,10 @@ App({
         // qcloud.setLoginUrl(config.service.loginUrl)
     },
     onShow(options){
-      console.log(options)
+      this.globalData.listRefreshFlag =true, // 便签列表刷新标识
+        this.globalData.tagListRefreshFlag =true,
+        this.globalData.tagListItemRefreshFlag =true,
+        this.globalData.markListRefreshFlag =true,
+        console.log('app.js')
     }
 })

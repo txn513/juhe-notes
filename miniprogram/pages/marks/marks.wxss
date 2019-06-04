@@ -27,6 +27,8 @@ page {
   -webkit-transform: translate(-50%, -50%);
   background: rgb(60, 152, 158);
   color: #fff;
+  font-size: 32rpx;
+  width: 100%;
 }
 
 
@@ -38,9 +40,10 @@ page {
     -webkit-box-orient: vertical;
 } */
 .no-note {
-  margin-top: 50rpx;
-  color: #888;
+  /* margin-top: 50rpx;
+  color: #888; */
   font-weight: 200;
+  
 }
 .no-note navigator{
   border-radius: 4px;
@@ -97,5 +100,5 @@ page {
 .ad {
   border-radius: 8rpx;
   margin-top: 20rpx;
-  height: 140rpx;
+  /* height: 140rpx; */
 }

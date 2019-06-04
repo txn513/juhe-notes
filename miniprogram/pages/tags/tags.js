@@ -37,7 +37,7 @@ Page({
     })
   },
   adError(err) {
-    console.log(err)
+    // console.log(err)
     this.setData({
       adError: true
     })
@@ -82,14 +82,14 @@ Page({
       return;
     }
     setTimeout(() => {
-      this.reset()
-      this.getAllListAsync()
+      // this.reset()
+      this.getAllListAsync(1)
     }, 300)
       // this.reset()
       // this.getAllListAsync()
   },
 
-  getTagLists() {
+  getTagLists(reset) {
     util.showBusy()
     let that = this;
     // let tableID = 41764;
@@ -97,13 +97,26 @@ Page({
     let query = new wx.BaaS.Query()
     let id = getApp().globalData.userID
     query.compare('created_by', '=', id)
+    if (reset && reset == 1) {
+      this.reset()
+    }
     MyTableObject.setQuery(query).orderBy('-created_at').limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       let list = res.data.objects;
+
+      if (reset && reset == 1) {
+        this.setData({
+          tagList: list,
+          listLen: list.length,
+        })
+      } else {
+        this.setData({
+          tagList: this.data.tagList.concat(list),
+          listLen: this.data.tagList.concat(list).length,
+        })
+      }
       this.setData({
-        tagList: this.data.tagList.concat(list),
         loaded: true,
-        listLen: this.data.tagList.concat(list).length,
-        totalCount: res.data.meta.total_count,
+        totalCount: res.data.meta.total_count
       })
 
       // app.globalData.listRefreshFlag = false
@@ -124,13 +137,13 @@ Page({
       })
     })
   },
-  getAllListAsync() {
+  getAllListAsync(reset) {
     if (app.globalData.userID) {
-      this.getTagLists()
+      this.getTagLists(reset)
     } else {
       app.userCallback = userId => {
         if (userId) {
-          this.getTagLists()
+          this.getTagLists(reset)
         }
       }
     }
@@ -317,7 +330,7 @@ Page({
 
   reset() {
     this.setData({
-      notesList: [],
+      tagList: [],
       tempDelObj: {},
       pageNum: 0,
       tempDelNum: 0
@@ -325,8 +338,8 @@ Page({
   },
   
   onPullDownRefresh() {
-    this.reset()
-    this.getAllListAsync()
+    // this.reset()
+    this.getAllListAsync(1)
   },
   onReachBottom() {
     let { pageNum, totalCount, numPerPage } = this.data;

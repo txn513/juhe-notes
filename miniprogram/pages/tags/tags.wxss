@@ -21,9 +21,10 @@ page {
 }
 
 .no-note {
-  width: 100%;
+  /* width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: center; */
+  font-weight: 200;
 }
 .no-note navigator{
   border-radius: 4px;
@@ -124,7 +125,7 @@ page {
 .ad {
   border-radius: 8rpx;
   margin-top: 20rpx;
-  height: 140rpx;
+  /* height: 140rpx; */
 }
 
 .create-new-btn {
@@ -135,4 +136,6 @@ page {
   -webkit-transform: translate(-50%, -50%);
   background: rgb(60, 152, 158);
   color: #fff;
+  font-size: 32rpx;
+  width: 100%;
 }

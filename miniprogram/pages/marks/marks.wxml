@@ -2,7 +2,7 @@
 <template is="tabBar" data="{{tabBar:bindData.tabBar}}"/> -->
 
 <view class='container {{isIphoneX? "iphoneX": ""}}'>
-  <view class='add-wrap' wx:if="{{!adError || !adClose}}">
+  <view class='add-wrap' wx:if="{{!adError && !adClose}}">
     <view class='ad'>
       <ad unit-id="adunit-32d6aab46df348fd" binderror="adError" bindclose="adClose"></ad>
     </view>

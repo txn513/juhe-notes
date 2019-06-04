@@ -29,12 +29,12 @@ Page({
     // needRefresh: false,
 
   },
-  adClose(err) {
+  adClose() {
     this.setData({
       addClose: true
     })
   },
-  adError() {
+  adError(err) {
     this.setData({
       adError: true
     })
@@ -119,19 +119,19 @@ Page({
       showMask: false
     })
   },
-  getAllNotesAsync() {
+  getAllNotesAsync(reset) {
     if (app.globalData.userID) {
-      this.getAllNotes()
+      this.getAllNotes(reset)
     } else {
       app.userCallback = userId => {
         if (userId) {
-          this.getAllNotes()
+          this.getAllNotes(reset)
         }
       }
     }
   },
   // 获取便签列表
-  getAllNotes() {
+  getAllNotes(reset) {
     util.showBusy()
     let that = this;
     // let tableID = 41764;
@@ -141,8 +141,10 @@ Page({
     query.compare('created_by', '=', id)
     query.compare('mark', '=', 1)
     let contentEndString = wx.getStorageSync('contentEndString')
-
-    MyTableObject.setQuery(query).orderBy('-updated_at').limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
+    if (reset && reset == 1) {
+      this.reset()
+    }
+    MyTableObject.setQuery(query).orderBy(['-modified_at', '-created_at']).limit(this.data.numPerPage).offset(this.data.numPerPage * this.data.pageNum - this.data.tempDelNum).find().then(res => {
       // success
 
       console.log(res)
@@ -179,11 +181,20 @@ Page({
       });
       // console.log(list)
       // this.getNoteTitle(list[0].content)
+      // console.log(this.data.notesList.concat(list).length)
+      if (reset && reset == 1) {
+        this.setData({
+          notesList: list,
+          listLen: list.length
+        });
+      } else {
+        this.setData({
+          notesList: this.data.notesList.concat(list),
+          listLen: this.data.notesList.concat(list).length
+        });
+      }
       this.setData({
-        notesList: this.data.notesList.concat(list),
-        listLen: this.data.notesList.concat(list).length,
         totalCount: res.data.meta.total_count,
-        // needRefresh: false
         loaded: true
       });
 
@@ -361,13 +372,13 @@ Page({
       return;
     }
     setTimeout(() => {
-      this.reset()
-      this.getAllNotesAsync()
+      // this.reset()
+      this.getAllNotesAsync(1)
     }, 300)
   },
   onPullDownRefresh() {
-    this.reset()
-    this.getAllNotesAsync()
+    // this.reset()
+    this.getAllNotesAsync(1)
   },
   onReachBottom() {
     let { pageNum, totalCount, numPerPage } = this.data;
